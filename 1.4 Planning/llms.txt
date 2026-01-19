@@ -1,0 +1,28 @@
+# Enterprise Platform Architecture Specification (EPAS)
+
+> Standards and patterns for building enterprise-grade multi-tenant SaaS applications.
+
+## Quick Start
+- Overview: /Enterprise_MultiPlatform_Architecture_Scaffold.md
+- v1.4 Planning: /1.4 Planning/
+
+## Architecture
+- Full Specification: /Enterprise_MultiPlatform_Architecture_Scaffold.md
+
+## Key Sections (in main spec)
+- Core Principles: Section 1
+- Security Architecture: Section 15
+- Authentication & Authorization: Section 16
+- API Standards: Section 17
+- Event-Driven Architecture: Section 18
+- Observability: Section 19
+- AI Agent Safety: Section 20
+- Developer Experience: Section 21
+
+## v1.4 Planning
+- Update Plan: /1.4 Planning/epas-v1.4-update-plan.md
+- AI-First Documentation: /1.4 Planning/epas-v1.4-update-plan.md#documentation-for-machine-readers
+- SDK-First Architecture: /1.4 Planning/epas-v1.4-update-plan.md#sdk-first-architecture
+
+## Agent Context
+- Coding rules: /1.4 Planning/CLAUDE.md
