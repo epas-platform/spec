@@ -4694,7 +4694,7 @@ class ITSMIntegration:
 
 **Version**: v1.3.0 DRAFT  
 **Status**: Ready for stakeholder review  
-**Document Owner**: Nathan Walker (nathan.walker@quant.ai)  
+**Document Owner**: Nathan Walker (nate@ravenhelm.co)  
 **Last Updated**: November 29, 2025  
 **Next Review**: Quarterly (or upon major architectural change)
 

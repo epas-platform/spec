@@ -222,9 +222,9 @@ This SAAA project implements ~60% of the Enterprise Architecture Scaffold:
 ## 📞 Contact
 
 **Document Owner**: Nathan Walker  
-**Email**: nathan.walker@quant.ai  
-**Role**: Area Vice President, Business Solutions  
-**Organization**: Quant.ai
+**Email**: nate@ravenhelm.co  
+**Role**: Founder  
+**Organization**: Ravenhelm
 
 ---
 
