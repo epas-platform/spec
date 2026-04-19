@@ -31,6 +31,10 @@ Amendments to v1.3 sections (applied in the monolithic scaffold):
 - Section 21 — Developer Experience: adds agent-readiness metrics and setup requirements
 - Appendix F — Documentation Checklist (new)
 
+Monolithic scaffold: [Enterprise_MultiPlatform_Architecture_Scaffold_v1.4.md](../Enterprise_MultiPlatform_Architecture_Scaffold_v1.4.md)
+
+Conformance declaration template: [conformance.yaml.template](./conformance.yaml.template) — copy to any implementing repository root as `conformance.yaml` and fill in.
+
 ---
 
 ## v1.4 Naming and Positioning
