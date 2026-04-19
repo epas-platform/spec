@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of Edge Deployment Specification
 
 EPAS v1.4 extends the platform to deployments where the central hub assumption breaks. Three scenarios motivate this specification:
 
@@ -17,7 +17,7 @@ This specification is **normative** for platforms that claim Edge conformance. C
 
 ---
 
-## 2. Relationship to Other Specifications
+## 2. Edge Deployment Relationship to Other Specifications
 
 - **Specification 02 (SDK-First)** — Edge clients consume the platform through an SDK, typically through a language binding appropriate for the constrained runtime (TypeScript for browser, Dart for Flutter, Python for Python-capable edge nodes).
 - **Specification 03 (Contract-Based Trust)** — Edge contracts buffer locally when disconnected and are recorded on the central ledger upon reconnection. Edge nodes MUST NOT fabricate contracts.
@@ -353,7 +353,7 @@ The central observability plane MUST provide visibility into:
 
 ---
 
-## 13. Conformance Requirements
+## 13. Edge Deployment Conformance Requirements
 
 A platform conforms to EPAS v1.4 Edge, NATS, and Flutter requirements when:
 
@@ -371,7 +371,7 @@ Platforms without edge deployment MAY declare `edge_deployment_supported: false`
 
 ---
 
-## 14. Explicit Non-Goals
+## 14. Edge Deployment Non-Goals
 
 This specification does not:
 

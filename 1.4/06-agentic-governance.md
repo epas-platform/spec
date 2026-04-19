@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of Agentic Governance
 
 EPAS v1.4 Agentic Governance defines what autonomous AI agents are permitted to do without human intervention, what requires human approval, and what is prohibited regardless of authorization.
 
@@ -15,7 +15,7 @@ This specification is **normative**. Platforms that deploy autonomous agents wit
 
 ---
 
-## 2. Relationship to Other Specifications
+## 2. Agentic Governance Relationship to Other Specifications
 
 - **Specification 02 (SDK-First)** — Agents consume the platform through the same SDK as any other client. Agentic governance constrains *what* agents do through the SDK, not *how* they access the SDK.
 - **Specification 03 (Contract-Based Trust)** — Approval-required and prohibited operations interact with the contract model at Review and Refuse stages. Approval-required operations produce contract offers that are held pending human approval. Prohibited operations produce immediate refusals.
@@ -330,7 +330,7 @@ An auditor reading the ledger can reconstruct the full governance history of eve
 
 ---
 
-## 12. Conformance Requirements
+## 12. Agentic Governance Conformance Requirements
 
 A platform conforms to EPAS v1.4 Agentic Governance when:
 
@@ -349,7 +349,7 @@ Partial conformance during migration from v1.3 is permitted and MUST be declared
 
 ---
 
-## 13. Explicit Non-Goals
+## 13. Agentic Governance Non-Goals
 
 Agentic Governance does not:
 

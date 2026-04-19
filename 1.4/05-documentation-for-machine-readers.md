@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of Machine-Reader Documentation Standards
 
 EPAS v1.4 inverts the traditional documentation audience model. In 2026, the primary consumer of developer documentation is often an **AI coding agent** attempting to resolve an issue autonomously. Human engineers are the secondary audience.
 
@@ -350,13 +350,13 @@ Documentation that describes mutating operations without contract context is inc
 
 ---
 
-## 10. Versioning Documentation
+## 10. Versioning Machine-Reader Documentation
 
 Documentation versioning follows the code. A documentation change accompanying a code change MUST land in the same pull request as the code change. Documentation drift from code is a regression that MUST be caught by CI.
 
 ---
 
-## 11. Conformance Requirements
+## 11. Machine-Reader Documentation Conformance Requirements
 
 A repository conforms to EPAS v1.4 Documentation for Machine Readers when:
 
@@ -372,7 +372,7 @@ Partial conformance during migration from v1.3 is permitted and MUST be declared
 
 ---
 
-## 12. Explicit Non-Goals
+## 12. Machine-Reader Documentation Non-Goals
 
 This specification does not:
 

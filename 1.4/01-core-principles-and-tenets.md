@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of EPAS v1.4 Core Principles and Tenets
 
 This specification establishes the **governing principles** and **architectural tenets** that every EPAS v1.4 platform MUST observe. Principles express intent; tenets encode that intent as machine-checkable constraints.
 
@@ -13,7 +13,7 @@ Principles are prose. Tenets are structured. Both are authoritative.
 
 ---
 
-## 2. Relationship to v1.3
+## 2. EPAS v1.4 Core Principles Relationship to v1.3
 
 EPAS v1.3 defined ten core principles. EPAS v1.4 **preserves all ten** and adds five. No v1.3 principle is removed.
 
@@ -231,7 +231,7 @@ A later specification that contradicts an earlier principle is defective. Defect
 
 ---
 
-## 9. Explicit Non-Goals
+## 9. EPAS v1.4 Core Principles Non-Goals
 
 This specification does not:
 

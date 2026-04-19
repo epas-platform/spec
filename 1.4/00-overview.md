@@ -6,7 +6,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of EPAS v1.4
 
 EPAS v1.4 defines the architectural specification for enterprise multi-platform systems whose **primary consumers are autonomous AI agents**, and whose **primary safety property is provable consent**.
 
@@ -130,7 +130,7 @@ Partial conformance is acceptable during migration from v1.3. Full conformance i
 
 ---
 
-## 7. Migration from v1.3
+## 7. EPAS v1.4 Migration from v1.3
 
 Existing v1.3 platforms migrate to v1.4 in four phases:
 
@@ -183,7 +183,7 @@ v1.4 is a technical scaffold aligned with internal policies, legal opinions, and
 
 ---
 
-## 10. Relationship to Reference Implementations
+## 10. EPAS v1.4 Relationship to Reference Implementations
 
 EPAS v1.4 is informed by one or more reference implementations that have materially influenced the specification. Reference implementations are **not named** in v1.4 specification text. The specification remains vendor-neutral and deployment-neutral.
 

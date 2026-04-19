@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of EPAS v1.4 API Architecture
 
 EPAS v1.4 API Architecture separates three concerns that are commonly conflated in REST-only designs:
 
@@ -343,7 +343,7 @@ Event Plane details are specified in document 08.
 
 ---
 
-## 11. Failure Semantics
+## 11. API Architecture Failure Semantics
 
 | Failure Point | Who Detects | Response |
 |---------------|-------------|----------|
@@ -359,7 +359,7 @@ Task failures do **not** invalidate audit intent. The contract remains recorded 
 
 ---
 
-## 12. Relationship to SDK (Specification 02)
+## 12. API Architecture Relationship to SDK (Specification 02)
 
 The Command API and the Query API are consumed by SDKs, never by clients directly. SDKs:
 
@@ -373,7 +373,7 @@ A client that bypasses the SDK and calls the Command or Query API directly is no
 
 ---
 
-## 13. Relationship to Contract Model (Specification 03)
+## 13. API Architecture Relationship to Contract Model (Specification 03)
 
 Every Command API call produces a contract offer per specification 03. Specifically:
 
@@ -389,7 +389,7 @@ The API surface and the contract lifecycle are in 1:1 correspondence. An API sha
 
 ---
 
-## 14. Explicit Non-Goals
+## 14. API Architecture Non-Goals
 
 The API Architecture does not:
 
@@ -403,7 +403,7 @@ Additional surfaces, bespoke endpoints, or "admin" shortcuts are non-conformant.
 
 ---
 
-## 15. Conformance Requirements
+## 15. API Architecture Conformance Requirements
 
 A platform conforms to EPAS v1.4 API Architecture when:
 
@@ -422,7 +422,7 @@ Partial conformance during migration is permitted and MUST be declared in `confo
 
 ---
 
-## 16. Summary
+## 16. API Architecture Summary
 
 EPAS v1.4 APIs exist to **declare intent, observe reality, and enforce governance**.
 

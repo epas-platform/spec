@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of EPAS v1.4 Event-Driven Architecture
 
 EPAS v1.4 defines the Event Plane — the asynchronous messaging backbone through which platform services communicate state changes. The Event Plane is the system of record for **what happened**. The Contract Plane (specification 03) is the system of record for **what was agreed to**. These two planes are orthogonal and MUST NOT be conflated.
 
@@ -13,7 +13,7 @@ This specification is **normative**. Platforms that deploy without an Event Plan
 
 ---
 
-## 2. Relationship to v1.3
+## 2. Event-Driven Architecture Relationship to v1.3
 
 v1.3 Section 11 defined:
 
@@ -139,7 +139,7 @@ Apache Pulsar is permitted and is a reasonable alternative to Kafka; it satisfie
 
 ---
 
-## 7. Subject and Topic Conventions
+## 7. Event Plane Subject and Topic Conventions
 
 All event bus implementations use the same logical subject structure. Concrete mappings to Kafka topic names or NATS subjects differ only in separators.
 
@@ -316,7 +316,7 @@ These metrics feed the Observability Plane. Event Plane failures (broker unavail
 
 ---
 
-## 15. Migration from v1.3 Phase-Based Guidance
+## 15. Event Plane Migration from v1.3 Phase-Based Guidance
 
 Teams operating v1.3 Phase 1 (Kafka) deployments migrate to v1.4 as follows:
 
@@ -329,7 +329,7 @@ v1.3 Phase 2 deployments that already run NATS JetStream are v1.4-conformant at 
 
 ---
 
-## 16. Conformance Requirements
+## 16. Event-Driven Architecture Conformance Requirements
 
 A platform conforms to EPAS v1.4 Event-Driven Architecture when:
 
@@ -348,7 +348,7 @@ Partial conformance during migration is permitted and MUST be declared in `confo
 
 ---
 
-## 17. Explicit Non-Goals
+## 17. Event-Driven Architecture Non-Goals
 
 This specification does not:
 

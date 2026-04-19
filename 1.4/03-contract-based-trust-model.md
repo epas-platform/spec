@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of the Contract-Based Trust Model
 
 EPAS v1.4 replaces implicit trust with **provable agreement**. This specification defines the contract lifecycle, the contract envelope, the contract ledger, and the relationship between contracts and the event plane.
 
@@ -15,7 +15,7 @@ This specification is **normative**. Implementations that deviate from the rules
 
 ---
 
-## 2. Core Principle
+## 2. Contract-Based Trust Core Principle
 
 > **No work is performed without an explicit contract.**
 
@@ -29,7 +29,7 @@ A contract that is not recorded in the ledger is not valid. An operation that la
 
 ---
 
-## 3. Relationship to v1.3
+## 3. Contract-Based Trust Relationship to v1.3
 
 EPAS v1.3 did not define a contract model. v1.3 relied on:
 
@@ -532,7 +532,7 @@ Hybrid substrates (e.g., permissioned formal-contract ledger with witness networ
 
 ---
 
-## 9. Throughput and Scalability
+## 9. Contract Ledger Throughput and Scalability
 
 The contract ledger is sized for consent, not for activity.
 
@@ -632,7 +632,7 @@ Every task event on the event plane MUST include the `contract_id` it was dispat
 
 ---
 
-## 11. Failure Semantics
+## 11. Contract Ledger Failure Semantics
 
 ### 11.1 Ledger Write Failure
 
@@ -700,7 +700,7 @@ Platforms that attempt to use the ledger as a runtime gate for every task are no
 
 ---
 
-## 15. Conformance Requirements
+## 15. Contract-Based Trust Conformance Requirements
 
 A platform conforms to EPAS v1.4 Contract-Based Trust Model when:
 
@@ -720,7 +720,7 @@ Partial conformance during migration from v1.3 is permitted and MUST be declared
 
 ---
 
-## 16. Explicit Non-Goals
+## 16. Contract-Based Trust Non-Goals
 
 The Contract-Based Trust Model does not:
 
@@ -735,7 +735,7 @@ The ledger exists solely to prove agreement and outcome. Mission scope beyond th
 
 ---
 
-## 17. Summary
+## 17. Contract-Based Trust Summary
 
 EPAS v1.4 Contract-Based Trust Model replaces implicit trust with provable agreement. Agents do not act without consent. Platforms do not execute without evidence. Auditors do not infer intent.
 

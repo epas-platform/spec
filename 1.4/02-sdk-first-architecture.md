@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of SDK-First Architecture
 
 EPAS v1.4 SDK-First Architecture ensures that:
 
@@ -28,7 +28,7 @@ This principle is non-negotiable. Exceptions require explicit amendment to this 
 
 ---
 
-## 3. Client Taxonomy
+## 3. SDK Client Taxonomy
 
 EPAS v1.4 recognizes four client classes. All four are equal under the SDK model. No client class is granted privileges that another lacks.
 
@@ -172,7 +172,7 @@ Read methods do not return `ContractHandle` objects. Reads never cause side effe
 
 ---
 
-## 8. Authentication and Identity
+## 8. SDK Authentication and Identity
 
 SDKs handle authentication internally. Callers provide an identity reference at client construction time and do not manage tokens manually.
 
@@ -271,7 +271,7 @@ When platform capabilities are exposed to agents through the Model Context Proto
 
 ---
 
-## 12. Error Model
+## 12. SDK Error Model
 
 SDKs MUST classify errors into exactly four categories:
 
@@ -286,7 +286,7 @@ Transport-layer errors (timeouts, TLS failures, DNS resolution failures) are map
 
 ---
 
-## 13. Versioning
+## 13. SDK Versioning
 
 ### 13.1 Version Independence
 
@@ -307,7 +307,7 @@ Every SDK MUST expose a `client.version` property that returns the SDK version a
 
 ---
 
-## 14. Package Structure
+## 14. SDK Package Structure
 
 Every service in an EPAS v1.4 platform MUST publish the following packages:
 
@@ -345,7 +345,7 @@ service/
 
 ---
 
-## 15. SDK Generation
+## 15. SDK Generation Rules
 
 SDKs MAY be hand-written or generated from OpenAPI specifications. Generated SDKs MUST be post-processed to satisfy the domain-oriented method shape requirements in Section 5.
 
@@ -353,7 +353,7 @@ A raw generated SDK that exposes transport paths as method names is non-conforma
 
 ---
 
-## 16. Conformance Requirements
+## 16. SDK-First Conformance Requirements
 
 A platform conforms to EPAS v1.4 SDK-First Architecture when:
 
@@ -369,7 +369,7 @@ Partial conformance is permitted during migration and MUST be declared in `confo
 
 ---
 
-## 17. Explicit Non-Goals
+## 17. SDK-First Non-Goals
 
 This specification does not:
 

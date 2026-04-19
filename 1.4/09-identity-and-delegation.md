@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Purpose
+## 1. Purpose of EPAS v1.4 Identity and Delegation Specification
 
 EPAS v1.4 requires **cryptographically provable** identity and delegation. The platform does not infer authority from network position, session token possession, or implicit delegation. Every authority claim is traceable to a signed delegation chain rooted in an accountable principal.
 
@@ -13,7 +13,7 @@ This specification is **normative**. Platforms that rely on bearer tokens as pro
 
 ---
 
-## 2. Relationship to Other Specifications
+## 2. Identity and Delegation Relationship to Other Specifications
 
 - **Specification 03 (Contract-Based Trust Model)** — Contracts name requesters and executors as DIDs. The delegation chain supporting a contract is referenced by `delegation_chain_id` in the contract envelope.
 - **Specification 04 (API Architecture)** — Every mutating API call carries a signed delegation envelope. Endpoint Service verifies the envelope before admission.
@@ -266,7 +266,7 @@ Delegation chains MAY be cached by verification services for performance. Cache 
 
 ---
 
-## 8. Revocation
+## 8. Delegation Revocation
 
 ### 8.1 Revocation Properties
 
@@ -368,7 +368,7 @@ These events are inputs to security monitoring, governance audit, and anomaly de
 
 ---
 
-## 13. Conformance Requirements
+## 13. Identity and Delegation Conformance Requirements
 
 A platform conforms to EPAS v1.4 Identity, Delegation, and Cryptographic Authority when:
 
@@ -387,7 +387,7 @@ Partial conformance during migration from v1.3 is permitted and MUST be declared
 
 ---
 
-## 14. Explicit Non-Goals
+## 14. Identity and Delegation Non-Goals
 
 This specification does not:
 
