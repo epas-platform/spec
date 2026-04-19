@@ -1,13 +1,13 @@
-# EPAS v1.4 — SDK-First Architecture
+# EPAS v2.0 — SDK-First Architecture
 
 > **Status:** Draft — Normative
-> This specification defines the SDK-first architecture for EPAS v1.4 platforms. It specifies how humans, automation, agents, and third-party systems interact with an EPAS platform without bypassing governance, contracts, or cryptographic authority.
+> This specification defines the SDK-first architecture for EPAS v2.0 platforms. It specifies how humans, automation, agents, and third-party systems interact with an EPAS platform without bypassing governance, contracts, or cryptographic authority.
 
 ---
 
 ## 1. Purpose of SDK-First Architecture
 
-EPAS v1.4 SDK-First Architecture ensures that:
+EPAS v2.0 SDK-First Architecture ensures that:
 
 - There is exactly **one correct way** to interact with an EPAS platform.
 - Every client expresses **intent**, not transport implementation.
@@ -30,7 +30,7 @@ This principle is non-negotiable. Exceptions require explicit amendment to this 
 
 ## 3. SDK Client Taxonomy
 
-EPAS v1.4 recognizes four client classes. All four are equal under the SDK model. No client class is granted privileges that another lacks.
+EPAS v2.0 recognizes four client classes. All four are equal under the SDK model. No client class is granted privileges that another lacks.
 
 | Client Class | Examples | SDK Required |
 |--------------|----------|--------------|
@@ -49,7 +49,7 @@ EPAS v1.4 recognizes four client classes. All four are equal under the SDK model
 
 ## 4. SDK Responsibilities
 
-Every EPAS v1.4 SDK **MUST**:
+Every EPAS v2.0 SDK **MUST**:
 
 1. Encapsulate the REST Command API so clients never construct HTTP requests directly.
 2. Encapsulate the GraphQL Query API so clients never construct GraphQL documents directly.
@@ -60,7 +60,7 @@ Every EPAS v1.4 SDK **MUST**:
 7. Provide deterministic error semantics classified into the taxonomy defined in Section 10.
 8. Emit structured audit events for every call made through the SDK.
 
-Every EPAS v1.4 SDK **MUST NOT**:
+Every EPAS v2.0 SDK **MUST NOT**:
 
 - Expose raw HTTP endpoints, GraphQL strings, or transport-layer primitives to the caller.
 - Permit arbitrary parameter mutation after a call has been constructed.
@@ -197,7 +197,7 @@ Delegation envelopes are defined in specification 09. SDKs construct envelopes; 
 
 ### 8.3 Token Handling
 
-SDKs obtain transport credentials (bearer tokens, cookies, mTLS certificates) as needed and discard them after identity extraction. Authority in EPAS v1.4 is expressed through signed delegation, not through bearer tokens.
+SDKs obtain transport credentials (bearer tokens, cookies, mTLS certificates) as needed and discard them after identity extraction. Authority in EPAS v2.0 is expressed through signed delegation, not through bearer tokens.
 
 ---
 
@@ -309,7 +309,7 @@ Every SDK MUST expose a `client.version` property that returns the SDK version a
 
 ## 14. SDK Package Structure
 
-Every service in an EPAS v1.4 platform MUST publish the following packages:
+Every service in an EPAS v2.0 platform MUST publish the following packages:
 
 | Package | Purpose | Consumers |
 |---------|---------|-----------|
@@ -325,7 +325,7 @@ service/
 ├── llms.txt                       # Agent discovery index (REQUIRED)
 ├── CLAUDE.md                      # Agent context file (REQUIRED)
 ├── README.md                      # Human overview
-├── conformance.yaml               # Declared EPAS v1.4 conformance state
+├── conformance.yaml               # Declared EPAS v2.0 conformance state
 │
 ├── packages/
 │   ├── api/                       # Core service
@@ -355,7 +355,7 @@ A raw generated SDK that exposes transport paths as method names is non-conforma
 
 ## 16. SDK-First Conformance Requirements
 
-A platform conforms to EPAS v1.4 SDK-First Architecture when:
+A platform conforms to EPAS v2.0 SDK-First Architecture when:
 
 1. Every client class in Section 3 consumes the platform through an official SDK.
 2. No client class calls platform APIs directly.

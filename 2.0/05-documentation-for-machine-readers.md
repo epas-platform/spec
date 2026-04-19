@@ -1,13 +1,13 @@
-# EPAS v1.4 — Documentation for Machine Readers
+# EPAS v2.0 — Documentation for Machine Readers
 
 > **Status:** Draft — Normative
-> This specification defines the documentation standards for EPAS v1.4 platforms, with AI coding agents as the primary audience and human engineers as the secondary audience.
+> This specification defines the documentation standards for EPAS v2.0 platforms, with AI coding agents as the primary audience and human engineers as the secondary audience.
 
 ---
 
 ## 1. Purpose of Machine-Reader Documentation Standards
 
-EPAS v1.4 inverts the traditional documentation audience model. In 2026, the primary consumer of developer documentation is often an **AI coding agent** attempting to resolve an issue autonomously. Human engineers are the secondary audience.
+EPAS v2.0 inverts the traditional documentation audience model. In 2026, the primary consumer of developer documentation is often an **AI coding agent** attempting to resolve an issue autonomously. Human engineers are the secondary audience.
 
 This inversion is consequential. Documentation optimized for human reading (narrative flow, implicit context, pronouns, embedded assumptions) is actively hostile to AI agents, which consume documentation through retrieval-augmented generation pipelines that chunk text into fragments. A paragraph that references "it" in a way that depends on the previous paragraph will be retrieved without its antecedent and answered incorrectly.
 
@@ -19,7 +19,7 @@ This specification is **normative**. Repositories that violate these standards a
 
 ## 2. Documentation Consumer Model
 
-EPAS v1.4 recognizes two documentation consumer classes. Both are first-class.
+EPAS v2.0 recognizes two documentation consumer classes. Both are first-class.
 
 ### 2.1 Primary Consumers
 
@@ -39,7 +39,7 @@ Documentation SHOULD serve both audiences. Where the two audiences' needs confli
 
 ## 3. Required Files
 
-Every EPAS v1.4 repository MUST contain the following files at the repository root or in the documented location:
+Every EPAS v2.0 repository MUST contain the following files at the repository root or in the documented location:
 
 | File | Location | Purpose | Consumer |
 |------|----------|---------|----------|
@@ -49,7 +49,7 @@ Every EPAS v1.4 repository MUST contain the following files at the repository ro
 | `.cursor/rules` | `.cursor/rules` | Cursor-specific agent rules (MAY be a symlink to `CLAUDE.md`) | Cursor |
 | `.github/copilot-instructions.md` | `.github/copilot-instructions.md` | GitHub Copilot instructions (MAY be a symlink to `CLAUDE.md`) | GitHub Copilot |
 | `docs/mcp-tools.md` | `docs/mcp-tools.md` | MCP tool documentation when the repository publishes an MCP server | AI agents |
-| `conformance.yaml` | Repository root | Declared EPAS v1.4 conformance state | CI, auditors |
+| `conformance.yaml` | Repository root | Declared EPAS v2.0 conformance state | CI, auditors |
 
 Repositories without `llms.txt` or `CLAUDE.md` (or the locally-appropriate equivalent per Section 6) are non-conformant.
 
@@ -216,7 +216,7 @@ A repository SHOULD maintain one canonical file (`CLAUDE.md`) and symlink or reg
 
 ## 7. RAG-Optimized Markdown
 
-Documentation is consumed by retrieval-augmented generation pipelines that chunk text. A paragraph that loses meaning when isolated from its neighbors will be retrieved and answered incorrectly. EPAS v1.4 requires five rules to ensure documentation survives chunking.
+Documentation is consumed by retrieval-augmented generation pipelines that chunk text. A paragraph that loses meaning when isolated from its neighbors will be retrieved and answered incorrectly. EPAS v2.0 requires five rules to ensure documentation survives chunking.
 
 ### 7.1 Rule 1 — No Orphan Pronouns
 
@@ -285,7 +285,7 @@ After considering various options and evaluating the trade-offs between
 complexity and performance, we decided to use PostgreSQL for the database.
 
 # Conformant
-PostgreSQL is the required database for all EPAS v1.4 services. This decision
+PostgreSQL is the required database for all EPAS v2.0 services. This decision
 was made after evaluating trade-offs between complexity and performance.
 ```
 
@@ -358,7 +358,7 @@ Documentation versioning follows the code. A documentation change accompanying a
 
 ## 11. Machine-Reader Documentation Conformance Requirements
 
-A repository conforms to EPAS v1.4 Documentation for Machine Readers when:
+A repository conforms to EPAS v2.0 Documentation for Machine Readers when:
 
 1. `llms.txt` exists at the repository root and is accurate.
 2. `CLAUDE.md` (or locally-appropriate equivalent) exists with all required sections from Section 5.1.

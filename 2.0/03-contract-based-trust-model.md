@@ -1,15 +1,15 @@
-# EPAS v1.4 — Contract-Based Trust Model
+# EPAS v2.0 — Contract-Based Trust Model
 
 > **Status:** Draft — Normative
-> This specification defines the Contract-Based Trust Model for EPAS v1.4. It specifies how work is offered, accepted, refused, recorded, executed, and proven. The model produces non-repudiable, audit-grade evidence that a specific action was requested by an authorized party, accepted by a bounded executor, and executed within agreed constraints.
+> This specification defines the Contract-Based Trust Model for EPAS v2.0. It specifies how work is offered, accepted, refused, recorded, executed, and proven. The model produces non-repudiable, audit-grade evidence that a specific action was requested by an authorized party, accepted by a bounded executor, and executed within agreed constraints.
 
 ---
 
 ## 1. Purpose of the Contract-Based Trust Model
 
-EPAS v1.4 replaces implicit trust with **provable agreement**. This specification defines the contract lifecycle, the contract envelope, the contract ledger, and the relationship between contracts and the event plane.
+EPAS v2.0 replaces implicit trust with **provable agreement**. This specification defines the contract lifecycle, the contract envelope, the contract ledger, and the relationship between contracts and the event plane.
 
-The Contract-Based Trust Model is the constitutional addition that distinguishes EPAS v1.4 from v1.3. Platforms that execute work without explicit contracts are non-conformant.
+The Contract-Based Trust Model is the constitutional addition that distinguishes EPAS v2.0 from v1.3. Platforms that execute work without explicit contracts are non-conformant.
 
 This specification is **normative**. Implementations that deviate from the rules in this document are non-conformant.
 
@@ -38,9 +38,9 @@ EPAS v1.3 did not define a contract model. v1.3 relied on:
 - Event-driven orchestration with CloudEvents
 - Audit logs in the Observability Plane
 
-EPAS v1.4 **preserves all of the above** and adds a distinct Contract Plane. Authentication proves identity; authorization proves permission; **a contract proves consent**. These are three orthogonal concerns.
+EPAS v2.0 **preserves all of the above** and adds a distinct Contract Plane. Authentication proves identity; authorization proves permission; **a contract proves consent**. These are three orthogonal concerns.
 
-Platforms that attempt to satisfy v1.4 by repurposing authorization records or event streams as contracts are non-conformant. Contracts have a distinct lifecycle, a distinct envelope, and a distinct storage discipline.
+Platforms that attempt to satisfy v2.0 by repurposing authorization records or event streams as contracts are non-conformant. Contracts have a distinct lifecycle, a distinct envelope, and a distinct storage discipline.
 
 ---
 
@@ -108,7 +108,7 @@ A contract is expressed as a canonical, signed envelope. The envelope is impleme
 contract:
   contract_id: string                     # UUIDv7 recommended
   operation_id: string                    # UUIDv7 recommended
-  schema_version: string                  # e.g., "epas.contract/1.4"
+  schema_version: string                  # e.g., "epas.contract/2.0"
 
   tenant: string                          # Tenant identifier
   environment: string                     # dev | test | staging | prod
@@ -273,13 +273,13 @@ ledger_entry:
 
 ## 8. Ledger Architecture: Modeling, Substrate, and External Anchoring
 
-EPAS v1.4 treats the contract ledger as a **composition of three concerns**, each with its own conformance requirements:
+EPAS v2.0 treats the contract ledger as a **composition of three concerns**, each with its own conformance requirements:
 
 1. **Contract Modeling** — how a contract is represented semantically (the language of templates, parties, and state transitions).
 2. **Ledger Substrate** — what stores the contract records durably (the persistent structure).
 3. **External Anchoring** — how ledger integrity is independently verifiable against a medium the platform does not control.
 
-Earlier revisions of this specification conflated these concerns. v1.4 separates them. A conformant platform MUST select an approach for each concern and declare the selection in `conformance.yaml`.
+Earlier revisions of this specification conflated these concerns. v2.0 separates them. A conformant platform MUST select an approach for each concern and declare the selection in `conformance.yaml`.
 
 ---
 
@@ -702,7 +702,7 @@ Platforms that attempt to use the ledger as a runtime gate for every task are no
 
 ## 15. Contract-Based Trust Conformance Requirements
 
-A platform conforms to EPAS v1.4 Contract-Based Trust Model when:
+A platform conforms to EPAS v2.0 Contract-Based Trust Model when:
 
 1. Every mutating operation is preceded by a contract offer.
 2. Every contract offer receives an explicit acceptance or signed refusal.
@@ -737,6 +737,6 @@ The ledger exists solely to prove agreement and outcome. Mission scope beyond th
 
 ## 17. Contract-Based Trust Summary
 
-EPAS v1.4 Contract-Based Trust Model replaces implicit trust with provable agreement. Agents do not act without consent. Platforms do not execute without evidence. Auditors do not infer intent.
+EPAS v2.0 Contract-Based Trust Model replaces implicit trust with provable agreement. Agents do not act without consent. Platforms do not execute without evidence. Auditors do not infer intent.
 
 The contract ledger is not a performance bottleneck. It is a court record.

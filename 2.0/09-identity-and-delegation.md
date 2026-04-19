@@ -1,15 +1,15 @@
-# EPAS v1.4 — Identity, Delegation, and Cryptographic Authority
+# EPAS v2.0 — Identity, Delegation, and Cryptographic Authority
 
 > **Status:** Draft — Normative
-> This specification defines the identity and delegation model for EPAS v1.4 platforms. It replaces token-passthrough authentication with decentralized identifiers, explicit delegation chains, and per-request signatures. The model is designed to eliminate the confused-deputy class of vulnerabilities that pervade token-bearer authentication in agentic systems.
+> This specification defines the identity and delegation model for EPAS v2.0 platforms. It replaces token-passthrough authentication with decentralized identifiers, explicit delegation chains, and per-request signatures. The model is designed to eliminate the confused-deputy class of vulnerabilities that pervade token-bearer authentication in agentic systems.
 
 ---
 
-## 1. Purpose of EPAS v1.4 Identity and Delegation Specification
+## 1. Purpose of EPAS v2.0 Identity and Delegation Specification
 
-EPAS v1.4 requires **cryptographically provable** identity and delegation. The platform does not infer authority from network position, session token possession, or implicit delegation. Every authority claim is traceable to a signed delegation chain rooted in an accountable principal.
+EPAS v2.0 requires **cryptographically provable** identity and delegation. The platform does not infer authority from network position, session token possession, or implicit delegation. Every authority claim is traceable to a signed delegation chain rooted in an accountable principal.
 
-This specification is **normative**. Platforms that rely on bearer tokens as proof of authority are non-conformant in v1.4.
+This specification is **normative**. Platforms that rely on bearer tokens as proof of authority are non-conformant in v2.0.
 
 ---
 
@@ -26,7 +26,7 @@ This specification is **normative**. Platforms that rely on bearer tokens as pro
 
 ### 3.1 Decentralized Identifiers (DIDs)
 
-Every identity in an EPAS v1.4 platform is expressed as a decentralized identifier (DID) per the W3C DID specification. A DID is a URI of the form:
+Every identity in an EPAS v2.0 platform is expressed as a decentralized identifier (DID) per the W3C DID specification. A DID is a URI of the form:
 
 ```
 did:{method}:{method-specific-identifier}
@@ -43,7 +43,7 @@ did:key:z6MkpTHR8VNsBxYAAWHut2Geadd9jSrGjjD...
 
 ### 3.2 Permitted DID Methods
 
-EPAS v1.4 permits:
+EPAS v2.0 permits:
 
 - `did:web` — canonical for platform-operated identities (users, services, agents). Resolves to a DID document served at a well-known URL.
 - `did:key` — permitted for ephemeral or transient identities (short-lived delegates, one-off service accounts).
@@ -67,7 +67,7 @@ DID documents are fetched over HTTPS and cached per the document's declared TTL.
 
 ## 4. Identity Classes
 
-EPAS v1.4 recognizes four identity classes. Each carries distinct lifecycle and trust properties.
+EPAS v2.0 recognizes four identity classes. Each carries distinct lifecycle and trust properties.
 
 ### 4.1 Human Identity
 
@@ -182,7 +182,7 @@ A delegation envelope declares that one identity grants scoped authority to anot
 ```yaml
 delegation:
   delegation_id: string                   # UUIDv7 recommended
-  schema_version: string                  # e.g., "epas.delegation/1.4"
+  schema_version: string                  # e.g., "epas.delegation/2.0"
 
   grantor:
     did: string                           # Who is granting authority
@@ -289,7 +289,7 @@ Revocation invalidates future authority. It does NOT invalidate past contracts. 
 
 ## 9. Per-Request Signatures
 
-EPAS v1.4 requires per-request signatures on every mutating API call. The signature:
+EPAS v2.0 requires per-request signatures on every mutating API call. The signature:
 
 - Covers the canonicalized request including method, URL, body, and critical headers.
 - Is produced by the SDK using the caller's private key.
@@ -317,7 +317,7 @@ request_signature:
 
 ## 10. Authentication Token Handling
 
-EPAS v1.4 does not eliminate bearer tokens — OIDC session tokens, workload tokens, and similar are used for initial identity extraction. But tokens do not carry authority after that extraction.
+EPAS v2.0 does not eliminate bearer tokens — OIDC session tokens, workload tokens, and similar are used for initial identity extraction. But tokens do not carry authority after that extraction.
 
 ### 10.1 Token Usage Rules
 
@@ -344,7 +344,7 @@ Identities are tenant-scoped by default. A user, agent, or service in tenant `ex
 
 ### 11.2 Cross-Platform Identity
 
-EPAS v1.4 platforms MAY federate identities with other EPAS-conformant platforms through DID methods (`did:web` or ledger-backed methods) that are resolvable across platforms. Federation:
+EPAS v2.0 platforms MAY federate identities with other EPAS-conformant platforms through DID methods (`did:web` or ledger-backed methods) that are resolvable across platforms. Federation:
 
 - Respects each platform's tenancy boundaries.
 - Requires mutual trust agreements between platform operators.
@@ -354,7 +354,7 @@ EPAS v1.4 platforms MAY federate identities with other EPAS-conformant platforms
 
 ## 12. Identity Events
 
-The following events MUST be emitted to the event plane by EPAS v1.4 platforms:
+The following events MUST be emitted to the event plane by EPAS v2.0 platforms:
 
 - `identity.registered` — a new DID is minted.
 - `identity.enrolled` — an agent is promoted from Tier 1 to Tier 2.
@@ -370,7 +370,7 @@ These events are inputs to security monitoring, governance audit, and anomaly de
 
 ## 13. Identity and Delegation Conformance Requirements
 
-A platform conforms to EPAS v1.4 Identity, Delegation, and Cryptographic Authority when:
+A platform conforms to EPAS v2.0 Identity, Delegation, and Cryptographic Authority when:
 
 1. Every identity is expressed as a DID per Section 3.
 2. Every identity class (human, service, agent, ephemeral) has a defined lifecycle and key management policy.

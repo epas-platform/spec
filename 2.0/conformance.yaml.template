@@ -1,6 +1,6 @@
-# EPAS v1.4 Conformance Declaration
+# EPAS v2.0 Conformance Declaration
 # =================================================================
-# This file declares a repository's conformance to EPAS v1.4.
+# This file declares a repository's conformance to EPAS v2.0.
 # Copy to the repository root as `conformance.yaml` and fill in.
 # CI validates this file on every pull request.
 #
@@ -10,7 +10,7 @@
 # =================================================================
 
 # ---- Document metadata --------------------------------------------
-epas_version: "1.4.0"
+epas_version: "2.0.0"
 repository: "example-corp/example-service"
 declared_by: "did:web:example.com:users:architect-owner"
 declared_at: "2026-04-19T00:00:00Z"
@@ -71,20 +71,20 @@ tenets:
   supply_chain_transparency: true
   itil_v4_service_management: true
 
-  # -- Documentation for Machine Readers (NEW in v1.4) ------------
+  # -- Documentation for Machine Readers (NEW in v2.0) ------------
   documentation_dual_audience: true
   llms_txt_mandatory: true
   agent_context_files_required: true
   rag_optimized_markdown: "in_progress"
   machine_readable_by_default: true
 
-  # -- SDK-First Architecture (NEW in v1.4) -----------------------
+  # -- SDK-First Architecture (NEW in v2.0) -----------------------
   sdk_first_architecture: "in_progress"
   no_direct_api_consumption: "in_progress"
   openapi_sdk_generation: false
   sdk_version_independent_of_api: true
 
-  # -- Contract-Based Trust (NEW in v1.4) -------------------------
+  # -- Contract-Based Trust (NEW in v2.0) -------------------------
   contract_based_execution: "in_progress"
   contract_ledger_mandatory: "in_progress"
   contract_ledger_append_only: true
@@ -96,7 +96,7 @@ tenets:
   refusal_is_first_class: "in_progress"
   contract_envelope_signed: "in_progress"
 
-  # -- Agentic Governance (NEW in v1.4) ---------------------------
+  # -- Agentic Governance (NEW in v2.0) ---------------------------
   agentic_governance_enabled: "in_progress"
   agent_operations_classified: true
   agent_guardrails_ci_validated: true
@@ -104,7 +104,7 @@ tenets:
   agent_identity_tier_model_implemented: "in_progress"
   per_request_signatures_required: "in_progress"
 
-  # -- Edge and Resilience (NEW in v1.4) --------------------------
+  # -- Edge and Resilience (NEW in v2.0) --------------------------
   edge_deployment_supported: false                    # Set true only if deploying to edge
   event_replay_on_reconnect: "not_applicable"         # Required when edge_deployment_supported: true
   offline_tolerant_execution: "not_applicable"        # Required when edge_deployment_supported: true
@@ -222,7 +222,7 @@ documentation:
   copilot_instructions_present: false
   mcp_tools_doc_path: "/docs/mcp-tools.md"
   rag_lint_in_ci: true
-  markdownlint_rule_set: "epas-v1.4"
+  markdownlint_rule_set: "epas-v2.0"
 
 # ---- Package structure -------------------------------------------
 packages:

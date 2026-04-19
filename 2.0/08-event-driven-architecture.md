@@ -1,13 +1,13 @@
-# EPAS v1.4 — Event-Driven Architecture
+# EPAS v2.0 — Event-Driven Architecture
 
 > **Status:** Draft — Normative
-> This specification defines the Event Plane for EPAS v1.4 platforms. It supersedes Section 11 of the v1.3 scaffold. The most substantive change from v1.3 is the promotion of NATS JetStream to primary event backbone; Kafka and Redpanda remain permitted for compliance-driven retention scenarios.
+> This specification defines the Event Plane for EPAS v2.0 platforms. It supersedes Section 11 of the v1.3 scaffold. The most substantive change from v1.3 is the promotion of NATS JetStream to primary event backbone; Kafka and Redpanda remain permitted for compliance-driven retention scenarios.
 
 ---
 
-## 1. Purpose of EPAS v1.4 Event-Driven Architecture
+## 1. Purpose of EPAS v2.0 Event-Driven Architecture
 
-EPAS v1.4 defines the Event Plane — the asynchronous messaging backbone through which platform services communicate state changes. The Event Plane is the system of record for **what happened**. The Contract Plane (specification 03) is the system of record for **what was agreed to**. These two planes are orthogonal and MUST NOT be conflated.
+EPAS v2.0 defines the Event Plane — the asynchronous messaging backbone through which platform services communicate state changes. The Event Plane is the system of record for **what happened**. The Contract Plane (specification 03) is the system of record for **what was agreed to**. These two planes are orthogonal and MUST NOT be conflated.
 
 This specification is **normative**. Platforms that deploy without an Event Plane, or that implement the Event Plane synchronously, are non-conformant.
 
@@ -22,12 +22,12 @@ v1.3 Section 11 defined:
 - CloudEvents as the standard envelope.
 - AsyncAPI as the contract format.
 
-v1.4 amends this to:
+v2.0 amends this to:
 
 - **NATS JetStream is the recommended primary event backbone** for new deployments.
 - **Kafka and Redpanda remain permitted** where regulatory retention requirements favor Kafka's archival ecosystem, or where existing Kafka deployments have substantial investment.
 - **CloudEvents and AsyncAPI remain mandatory** without change.
-- **Every event MUST carry a `contractid` CloudEvents extension attribute** — this is new in v1.4 and is non-negotiable. CloudEvents 1.0 requires extension attribute names to be lowercase with no separators; the same identifier appears as `contract_id` in JSON envelopes and prose, and as `contractid` when it is the CloudEvents attribute name.
+- **Every event MUST carry a `contractid` CloudEvents extension attribute** — this is new in v2.0 and is non-negotiable. CloudEvents 1.0 requires extension attribute names to be lowercase with no separators; the same identifier appears as `contract_id` in JSON envelopes and prose, and as `contractid` when it is the CloudEvents attribute name.
 
 v1.3 Phase 1 / Phase 2 language is retired. New deployments select a backbone on merit, not on phase.
 
@@ -35,7 +35,7 @@ v1.3 Phase 1 / Phase 2 language is retired. New deployments select a backbone on
 
 ## 3. Why Event-Driven is Mandatory
 
-Event-driven architecture is mandatory in EPAS v1.4 for reasons that do not change between minor versions:
+Event-driven architecture is mandatory in EPAS v2.0 for reasons that do not change between minor versions:
 
 - **Decoupling** — Services do not need synchronous knowledge of their consumers.
 - **Audit** — Every state change produces a durable record suitable for forensic replay.
@@ -43,7 +43,7 @@ Event-driven architecture is mandatory in EPAS v1.4 for reasons that do not chan
 - **Replayability** — Downstream systems rebuild derived state from the event log.
 - **Multi-consumer economics** — A single event serves multiple consumers without fan-out in the producer.
 
-Platforms that use synchronous RPC as their primary coordination mechanism are not EPAS v1.4 platforms. Synchronous RPC is permitted as an implementation detail within the Internal Service API (specification 04) but MUST NOT be the substrate for cross-service coordination.
+Platforms that use synchronous RPC as their primary coordination mechanism are not EPAS v2.0 platforms. Synchronous RPC is permitted as an implementation detail within the Internal Service API (specification 04) but MUST NOT be the substrate for cross-service coordination.
 
 ---
 
@@ -64,7 +64,7 @@ Teams selecting an event bus MUST evaluate candidates against these criteria:
 | **Edge suitability** | Native leaf-node or extension-node topology (specification 07) |
 | **Protocol openness** | Open-source implementations; open protocol spec |
 
-EPAS v1.4 recommends NATS JetStream as a reasonable default across these criteria, but specific deployments MAY select alternatives when justified against the criteria above.
+EPAS v2.0 recommends NATS JetStream as a reasonable default across these criteria, but specific deployments MAY select alternatives when justified against the criteria above.
 
 ---
 
@@ -72,7 +72,7 @@ EPAS v1.4 recommends NATS JetStream as a reasonable default across these criteri
 
 ### 5.1 Why NATS JetStream
 
-NATS JetStream satisfies the EPAS v1.4 event bus requirements with specific strengths:
+NATS JetStream satisfies the EPAS v2.0 event bus requirements with specific strengths:
 
 - **Sub-millisecond latency** at the core dispatch layer.
 - **Native leaf-node topology** for edge deployments (specification 07).
@@ -83,7 +83,7 @@ NATS JetStream satisfies the EPAS v1.4 event bus requirements with specific stre
 
 ### 5.2 Required NATS JetStream Configuration
 
-Every EPAS v1.4 deployment using NATS JetStream MUST:
+Every EPAS v2.0 deployment using NATS JetStream MUST:
 
 - Configure streams with explicit retention policies per stream.
 - Enable replication with a minimum replica count of 3 for production streams.
@@ -135,7 +135,7 @@ These services are typically **inadequate** as the platform's primary event back
 
 RabbitMQ is permitted for task-queue patterns and low-volume integrations; it is not recommended as the primary event backbone for high-throughput platform coordination.
 
-Apache Pulsar is permitted and is a reasonable alternative to Kafka; it satisfies most EPAS v1.4 requirements natively. Pulsar's operational footprint is heavier than NATS JetStream, making it less suitable for edge deployments.
+Apache Pulsar is permitted and is a reasonable alternative to Kafka; it satisfies most EPAS v2.0 requirements natively. Pulsar's operational footprint is heavier than NATS JetStream, making it less suitable for edge deployments.
 
 ---
 
@@ -190,9 +190,9 @@ Every event MUST include the following CloudEvents-specified attributes:
 | `time` | RFC 3339 timestamp at production |
 | `datacontenttype` | MIME type of the event data payload |
 
-### 8.2 EPAS v1.4 Extension Attributes (Mandatory)
+### 8.2 EPAS v2.0 Extension Attributes (Mandatory)
 
-Every EPAS v1.4 event MUST additionally include these extension attributes:
+Every EPAS v2.0 event MUST additionally include these extension attributes:
 
 | Attribute | Purpose |
 |-----------|---------|
@@ -318,20 +318,20 @@ These metrics feed the Observability Plane. Event Plane failures (broker unavail
 
 ## 15. Event Plane Migration from v1.3 Phase-Based Guidance
 
-Teams operating v1.3 Phase 1 (Kafka) deployments migrate to v1.4 as follows:
+Teams operating v1.3 Phase 1 (Kafka) deployments migrate to v2.0 as follows:
 
 1. **Evaluate** the current Kafka deployment against the NATS JetStream recommendation in Section 5.
 2. **Decide** — keep Kafka (with justification per Section 6.1) or migrate.
 3. **If migrating** — run dual-producer emit (events published to both buses) during migration, cut consumers over in waves, retire Kafka when all consumers are migrated and retention requirements are met.
-4. **If keeping Kafka** — declare the justification in `conformance.yaml` and ensure all other v1.4 event plane requirements are satisfied.
+4. **If keeping Kafka** — declare the justification in `conformance.yaml` and ensure all other v2.0 event plane requirements are satisfied.
 
-v1.3 Phase 2 deployments that already run NATS JetStream are v1.4-conformant at the event bus layer once `contractid` is added to every event.
+v1.3 Phase 2 deployments that already run NATS JetStream are v2.0-conformant at the event bus layer once `contractid` is added to every event.
 
 ---
 
 ## 16. Event-Driven Architecture Conformance Requirements
 
-A platform conforms to EPAS v1.4 Event-Driven Architecture when:
+A platform conforms to EPAS v2.0 Event-Driven Architecture when:
 
 1. An event bus is deployed as the primary coordination mechanism.
 2. The selected bus is NATS JetStream (recommended) or a permitted alternative per Section 6.

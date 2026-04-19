@@ -1,13 +1,13 @@
-# EPAS v1.4 — Edge Nodes, NATS JetStream, and Flutter Clients
+# EPAS v2.0 — Edge Nodes, NATS JetStream, and Flutter Clients
 
 > **Status:** Draft — Normative
-> This specification defines the Edge Node deployment class, the NATS JetStream leaf-node event topology that supports it, and the Go-aggregator / Flutter-client pattern used for mobile and tactical deployments. This specification supersedes the v1.4 Edge/NATS/Flutter Addendum in `1.4 Planning/`.
+> This specification defines the Edge Node deployment class, the NATS JetStream leaf-node event topology that supports it, and the Go-aggregator / Flutter-client pattern used for mobile and tactical deployments. This specification supersedes the v1.4 Edge/NATS/Flutter Addendum in `1.4 Planning/` (the addendum was authored under the v1.4 working title before the SemVer correction to v2.0).
 
 ---
 
 ## 1. Purpose of Edge Deployment Specification
 
-EPAS v1.4 extends the platform to deployments where the central hub assumption breaks. Three scenarios motivate this specification:
+EPAS v2.0 extends the platform to deployments where the central hub assumption breaks. Three scenarios motivate this specification:
 
 1. **Constrained hardware** — embedded systems, single-board computers, and mobile sensor nodes that cannot run the full platform stack.
 2. **Intermittent connectivity** — environments where wide-area network availability cannot be assumed and cannot be made reliable.
@@ -21,7 +21,7 @@ This specification is **normative** for platforms that claim Edge conformance. C
 
 - **Specification 02 (SDK-First)** — Edge clients consume the platform through an SDK, typically through a language binding appropriate for the constrained runtime (TypeScript for browser, Dart for Flutter, Python for Python-capable edge nodes).
 - **Specification 03 (Contract-Based Trust)** — Edge contracts buffer locally when disconnected and are recorded on the central ledger upon reconnection. Edge nodes MUST NOT fabricate contracts.
-- **Specification 08 (Event-Driven Architecture)** — NATS JetStream is the primary event backbone in v1.4. This specification defines the leaf-node topology used at the edge.
+- **Specification 08 (Event-Driven Architecture)** — NATS JetStream is the primary event backbone in v2.0. This specification defines the leaf-node topology used at the edge.
 - **Specification 09 (Identity and Delegation)** — Edge agents carry the same DID-based identity as central agents. Disconnected operation does not suspend identity verification.
 
 ---
@@ -79,7 +79,7 @@ Edge Nodes are distinct from Central Services (which assume continuous connectiv
 
 ## 4. NATS JetStream Leaf Node Topology
 
-EPAS v1.4 selects NATS JetStream as the primary event backbone (see specification 08). At the edge, NATS leaf nodes provide the offline-tolerant transport.
+EPAS v2.0 selects NATS JetStream as the primary event backbone (see specification 08). At the edge, NATS leaf nodes provide the offline-tolerant transport.
 
 ### 4.1 Leaf Node Properties
 
@@ -174,7 +174,7 @@ Contracts outside the locally-authoritative scope MUST NOT execute during discon
 
 ## 6. Go Aggregator Pattern
 
-For deployments that expose platform capabilities to mobile, tactical, or low-resource clients, EPAS v1.4 recognizes an intermediate service — the **Go Aggregator** — that bridges NATS JetStream to client-friendly protocols.
+For deployments that expose platform capabilities to mobile, tactical, or low-resource clients, EPAS v2.0 recognizes an intermediate service — the **Go Aggregator** — that bridges NATS JetStream to client-friendly protocols.
 
 ### 6.1 Go Aggregator Responsibilities
 
@@ -213,7 +213,7 @@ A Flutter client does not call the platform directly. The aggregator is the trus
 
 ### 7.1 Flutter SDK Requirements
 
-Flutter applications targeting EPAS v1.4 consume a Dart SDK that:
+Flutter applications targeting EPAS v2.0 consume a Dart SDK that:
 
 - Implements the SDK-first contract from specification 02.
 - Returns `ContractHandle` objects from mutating calls.
@@ -249,7 +249,7 @@ Flutter clients operating offline:
 
 ## 8. Tactical Integration (Optional)
 
-For deployments in tactical, operational-awareness, or emergency-response contexts, EPAS v1.4 defines an optional bridge to the Cursor-on-Target (CoT) ecosystem.
+For deployments in tactical, operational-awareness, or emergency-response contexts, EPAS v2.0 defines an optional bridge to the Cursor-on-Target (CoT) ecosystem.
 
 ### 8.1 Tactical Bridge Responsibilities
 
@@ -355,7 +355,7 @@ The central observability plane MUST provide visibility into:
 
 ## 13. Edge Deployment Conformance Requirements
 
-A platform conforms to EPAS v1.4 Edge, NATS, and Flutter requirements when:
+A platform conforms to EPAS v2.0 Edge, NATS, and Flutter requirements when:
 
 1. Edge nodes run NATS JetStream leaf nodes with durable local streams per Section 4.2.
 2. Edge subject naming follows the canonical scheme in Section 4.3.

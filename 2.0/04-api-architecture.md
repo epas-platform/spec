@@ -1,13 +1,13 @@
-# EPAS v1.4 — API Architecture (Command, Query, Internal)
+# EPAS v2.0 — API Architecture (Command, Query, Internal)
 
 > **Status:** Draft — Normative
-> This specification defines the three API surfaces of an EPAS v1.4 platform, their semantic boundaries, and the relationship between APIs, SDKs (specification 02), and contracts (specification 03).
+> This specification defines the three API surfaces of an EPAS v2.0 platform, their semantic boundaries, and the relationship between APIs, SDKs (specification 02), and contracts (specification 03).
 
 ---
 
-## 1. Purpose of EPAS v1.4 API Architecture
+## 1. Purpose of EPAS v2.0 API Architecture
 
-EPAS v1.4 API Architecture separates three concerns that are commonly conflated in REST-only designs:
+EPAS v2.0 API Architecture separates three concerns that are commonly conflated in REST-only designs:
 
 1. **Intent** — how a client declares what it wants to change.
 2. **Observation** — how a client reads current and historical state.
@@ -31,7 +31,7 @@ This specification is **normative**. Surfaces that blur these boundaries are non
 
 ## 3. API Surface Taxonomy
 
-EPAS v1.4 platforms expose exactly three API surfaces. No additional surfaces are permitted without amendment to this specification.
+EPAS v2.0 platforms expose exactly three API surfaces. No additional surfaces are permitted without amendment to this specification.
 
 | Surface | Purpose | Protocol | Consumer |
 |---------|---------|----------|----------|
@@ -405,7 +405,7 @@ Additional surfaces, bespoke endpoints, or "admin" shortcuts are non-conformant.
 
 ## 15. API Architecture Conformance Requirements
 
-A platform conforms to EPAS v1.4 API Architecture when:
+A platform conforms to EPAS v2.0 API Architecture when:
 
 1. Exactly three API surfaces exist: Command (REST), Query (GraphQL), and Internal Service (gRPC).
 2. Command API URLs follow the canonical structure in Section 4.2.
@@ -424,7 +424,7 @@ Partial conformance during migration is permitted and MUST be declared in `confo
 
 ## 16. API Architecture Summary
 
-EPAS v1.4 APIs exist to **declare intent, observe reality, and enforce governance**.
+EPAS v2.0 APIs exist to **declare intent, observe reality, and enforce governance**.
 
 They do not execute work. They do not mutate state. They do not hide side effects.
 

@@ -1,13 +1,13 @@
-# EPAS v1.4 — Agentic Governance and Guardrails
+# EPAS v2.0 — Agentic Governance and Guardrails
 
 > **Status:** Draft — Normative
-> This specification defines how EPAS v1.4 platforms govern autonomous AI agent operations through a three-tier classification, the enforcement mechanisms that back each tier, and the integration between agentic guardrails and the Contract-Based Trust Model.
+> This specification defines how EPAS v2.0 platforms govern autonomous AI agent operations through a three-tier classification, the enforcement mechanisms that back each tier, and the integration between agentic guardrails and the Contract-Based Trust Model.
 
 ---
 
 ## 1. Purpose of Agentic Governance
 
-EPAS v1.4 Agentic Governance defines what autonomous AI agents are permitted to do without human intervention, what requires human approval, and what is prohibited regardless of authorization.
+EPAS v2.0 Agentic Governance defines what autonomous AI agents are permitted to do without human intervention, what requires human approval, and what is prohibited regardless of authorization.
 
 The specification exists because AI agents are neither services (fully constrained by code) nor humans (constrained by judgment and accountability). An AI agent operates somewhere between — capable of taking action at speed, but without the embodied accountability that human actors carry. Platforms that treat agents as either extreme produce systems that either constrain agents into uselessness or cede too much authority to them.
 
@@ -252,7 +252,7 @@ Prohibited operations do not produce approval requests. There is no approval pat
 
 ## 8. Emergency Override
 
-Governance systems that cannot be overridden in genuine emergencies produce brittle operations. Governance systems that can be overridden without evidence produce fraud. EPAS v1.4 requires a narrow emergency override path with maximum evidence.
+Governance systems that cannot be overridden in genuine emergencies produce brittle operations. Governance systems that can be overridden without evidence produce fraud. EPAS v2.0 requires a narrow emergency override path with maximum evidence.
 
 ### 8.1 Override Properties
 
@@ -296,7 +296,7 @@ A worker cannot elevate beyond its supervisor. A worker that encounters an opera
 
 ## 10. Agent Trust Accumulation
 
-Over time, an agent accumulates behavioral history — contracts offered, contracts refused, policy violations, approvals granted, approvals rejected. EPAS v1.4 permits but does not mandate **trust accumulation**: adjusting an agent's effective classification based on observed history.
+Over time, an agent accumulates behavioral history — contracts offered, contracts refused, policy violations, approvals granted, approvals rejected. EPAS v2.0 permits but does not mandate **trust accumulation**: adjusting an agent's effective classification based on observed history.
 
 ### 10.1 Trust Accumulation Properties
 
@@ -326,13 +326,13 @@ Every guardrail evaluation — allowed, approval-required, or prohibited — pro
 - Every refusal and the signed reason.
 - Every override and the authority that invoked it.
 
-An auditor reading the ledger can reconstruct the full governance history of every agent in the platform. This is what makes agentic governance in EPAS v1.4 distinct from policy engines in earlier architectures: governance decisions are not ephemeral, they are durable cryptographic evidence.
+An auditor reading the ledger can reconstruct the full governance history of every agent in the platform. This is what makes agentic governance in EPAS v2.0 distinct from policy engines in earlier architectures: governance decisions are not ephemeral, they are durable cryptographic evidence.
 
 ---
 
 ## 12. Agentic Governance Conformance Requirements
 
-A platform conforms to EPAS v1.4 Agentic Governance when:
+A platform conforms to EPAS v2.0 Agentic Governance when:
 
 1. Every agent has a signed, versioned agentic governance policy per Section 5.
 2. Every agent operation is classified as allowed, approval-required, or prohibited.

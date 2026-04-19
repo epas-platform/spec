@@ -1,29 +1,29 @@
-# EPAS v1.4 — Core Principles and Architectural Tenets
+# EPAS v2.0 — Core Principles and Architectural Tenets
 
 > **Status:** Draft — Constitutional Layer
-> **Normative.** This specification defines the governing principles and the machine-readable architectural tenets for EPAS v1.4. All subsequent v1.4 specifications are subordinate to the principles defined here.
+> **Normative.** This specification defines the governing principles and the machine-readable architectural tenets for EPAS v2.0. All subsequent v2.0 specifications are subordinate to the principles defined here.
 
 ---
 
-## 1. Purpose of EPAS v1.4 Core Principles and Tenets
+## 1. Purpose of EPAS v2.0 Core Principles and Tenets
 
-This specification establishes the **governing principles** and **architectural tenets** that every EPAS v1.4 platform MUST observe. Principles express intent; tenets encode that intent as machine-checkable constraints.
+This specification establishes the **governing principles** and **architectural tenets** that every EPAS v2.0 platform MUST observe. Principles express intent; tenets encode that intent as machine-checkable constraints.
 
 Principles are prose. Tenets are structured. Both are authoritative.
 
 ---
 
-## 2. EPAS v1.4 Core Principles Relationship to v1.3
+## 2. EPAS v2.0 Core Principles Relationship to v1.3
 
-EPAS v1.3 defined ten core principles. EPAS v1.4 **preserves all ten** and adds five. No v1.3 principle is removed.
+EPAS v1.3 defined ten core principles. EPAS v2.0 **preserves all ten** and adds five. No v1.3 principle is removed.
 
-The five additions reflect the v1.4 constitutional shift: the platform's primary consumer is an AI agent, and the platform's primary safety property is provable consent.
+The five additions reflect the v2.0 constitutional shift: the platform's primary consumer is an AI agent, and the platform's primary safety property is provable consent.
 
 ---
 
-## 3. Core Principles (v1.4)
+## 3. Core Principles (v2.0)
 
-The v1.4 core principles drive every architectural decision. Principles are listed in precedence order. When two principles conflict, the earlier principle wins.
+The v2.0 core principles drive every architectural decision. Principles are listed in precedence order. When two principles conflict, the earlier principle wins.
 
 ### 3.1 Principles Carried from v1.3
 
@@ -38,7 +38,7 @@ The v1.4 core principles drive every architectural decision. Principles are list
 - **Cost visibility mandatory** — Every agent-to-agent call, LLM invocation, and resource usage is tracked. Untracked cost is non-conformant.
 - **Multi-model by default** — The platform supports multiple LLM providers to enable cost optimization and vendor resilience.
 
-### 3.2 Principles New in v1.4
+### 3.2 Principles New in v2.0
 
 - **Machine-readable by default** — Documentation serves AI agents as primary consumers. Human readability is preserved but not prioritized over agent comprehension. Repositories without machine-readable discovery indices (`llms.txt`) and agent context files are non-conformant.
 - **SDK-first consumption** — SDKs are the product. APIs are implementation detail. Every client MUST consume the platform through an official SDK. Direct API consumption by clients is non-conformant.
@@ -48,7 +48,7 @@ The v1.4 core principles drive every architectural decision. Principles are list
 
 ---
 
-## 4. Architectural Tenets (v1.4)
+## 4. Architectural Tenets (v2.0)
 
 Architectural tenets are the machine-readable encoding of the principles above. Each tenet is a Boolean assertion that the platform either satisfies or does not. Tenets are consumed by CI validation, conformance tests, and architecture review.
 
@@ -94,20 +94,20 @@ architectural_tenets:
   - supply_chain_transparency
   - itil_v4_service_management
 
-  # Documentation for Machine Readers (NEW in v1.4)
+  # Documentation for Machine Readers (NEW in v2.0)
   - documentation_dual_audience
   - llms_txt_mandatory
   - agent_context_files_required
   - rag_optimized_markdown
   - machine_readable_by_default
 
-  # SDK-First Architecture (NEW in v1.4)
+  # SDK-First Architecture (NEW in v2.0)
   - sdk_first_architecture
   - no_direct_api_consumption
   - openapi_sdk_generation
   - sdk_version_independent_of_api
 
-  # Contract-Based Trust (NEW in v1.4)
+  # Contract-Based Trust (NEW in v2.0)
   - contract_based_execution
   - contract_ledger_mandatory
   - contract_ledger_append_only
@@ -119,7 +119,7 @@ architectural_tenets:
   - refusal_is_first_class
   - contract_envelope_signed
 
-  # Agentic Governance (NEW in v1.4)
+  # Agentic Governance (NEW in v2.0)
   - agentic_governance_enabled
   - agent_operations_classified
   - agent_guardrails_ci_validated
@@ -127,7 +127,7 @@ architectural_tenets:
   - agent_identity_tier_model_implemented   # DID → wallet → scoped-authority progression per spec 09
   - per_request_signatures_required         # Authority bound to the specific request, not a bearer token
 
-  # Edge and Resilience (NEW in v1.4)
+  # Edge and Resilience (NEW in v2.0)
   - edge_deployment_supported
   - event_replay_on_reconnect
   - offline_tolerant_execution
@@ -152,14 +152,14 @@ A tenet enforced only by documentation or developer discipline is non-conformant
 
 ## 6. Five-Plane Architecture
 
-EPAS v1.4 organizes the platform into **five logical planes**. v1.3 defined four planes; v1.4 adds the **Contract Plane**.
+EPAS v2.0 organizes the platform into **five logical planes**. v1.3 defined four planes; v2.0 adds the **Contract Plane**.
 
 ### 6.1 Plane Definitions
 
 - **Control Plane** — Configuration of tenants, organizations, business units, projects, model catalogs, tool catalogs, policies, guardrails, access control, observability, and cost budgets.
 - **Data Plane** — Runtime agents, workflows, connectors, tools, operational storage, and multi-tenant data isolation.
 - **Event Plane** — Asynchronous messaging backbone, CloudEvents propagation, AsyncAPI contracts, dead-letter queues, retry logic. The Event Plane records **what happened**.
-- **Contract Plane** *(new in v1.4)* — Contract ledger, delegation chains, refusal records, attestations. The Contract Plane records **what was agreed to**. The Contract Plane is orthogonal to the Event Plane and MUST NOT be conflated with it.
+- **Contract Plane** *(new in v2.0)* — Contract ledger, delegation chains, refusal records, attestations. The Contract Plane records **what was agreed to**. The Contract Plane is orthogonal to the Event Plane and MUST NOT be conflated with it.
 - **Observability Plane** — Logs, metrics, traces, security and audit logs, evaluation runs, cost tracking, AI decision logging, explainability.
 
 ### 6.2 Plane Separation Invariants
@@ -206,7 +206,7 @@ EPAS v1.4 organizes the platform into **five logical planes**. v1.3 defined four
 
 ## 7. Conformance
 
-A platform conforms to EPAS v1.4 core principles and architectural tenets when:
+A platform conforms to EPAS v2.0 core principles and architectural tenets when:
 
 1. Every principle in Section 3 is observably upheld.
 2. Every tenet in Section 4 is enforced at the appropriate layer per Section 5.
@@ -224,14 +224,14 @@ When specifications in this document set conflict:
 
 1. Core Principles (this document, Section 3) are highest precedence.
 2. Architectural Tenets (this document, Section 4) are next.
-3. Specifications 02 through 09 in the v1.4 document set follow.
+3. Specifications 02 through 09 in the v2.0 document set follow.
 4. Amendments to v1.3 sections in the monolithic scaffold are lowest precedence.
 
 A later specification that contradicts an earlier principle is defective. Defects are resolved by amending the later specification, not by weakening the principle.
 
 ---
 
-## 9. EPAS v1.4 Core Principles Non-Goals
+## 9. EPAS v2.0 Core Principles Non-Goals
 
 This specification does not:
 

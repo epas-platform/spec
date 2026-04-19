@@ -1,4 +1,4 @@
-# EPAS v1.4 Overview
+# EPAS v2.0 Overview
 
 > **Status:** Draft
 > **Supersedes:** EPAS v1.3.0 (November 2025)
@@ -6,18 +6,18 @@
 
 ---
 
-## 1. Purpose of EPAS v1.4
+## 1. Purpose of EPAS v2.0
 
-EPAS v1.4 defines the architectural specification for enterprise multi-platform systems whose **primary consumers are autonomous AI agents**, and whose **primary safety property is provable consent**.
+EPAS v2.0 defines the architectural specification for enterprise multi-platform systems whose **primary consumers are autonomous AI agents**, and whose **primary safety property is provable consent**.
 
-v1.4 is not an incremental revision. It is a constitutional shift.
+v2.0 is not an incremental revision. It is a constitutional shift.
 
-Where EPAS v1.3 specified how to build a multi-tenant enterprise platform with AI components, v1.4 specifies how to build a platform whose operational reality is shaped by AI agents acting under explicit, auditable authority. Every platform surface — API, SDK, event, storage, human interface — is evaluated against two load-bearing questions:
+Where EPAS v1.3 specified how to build a multi-tenant enterprise platform with AI components, v2.0 specifies how to build a platform whose operational reality is shaped by AI agents acting under explicit, auditable authority. Every platform surface — API, SDK, event, storage, human interface — is evaluated against two load-bearing questions:
 
 1. **Can an AI agent consume this surface correctly without privileged access?**
 2. **Can every action taken through this surface be proven to have been consented to?**
 
-If either answer is no, the surface is non-conformant with v1.4.
+If either answer is no, the surface is non-conformant with v2.0.
 
 ---
 
@@ -36,7 +36,7 @@ If either answer is no, the surface is non-conformant with v1.4.
 
 ---
 
-## 3. What v1.4 Keeps from v1.3
+## 3. What v2.0 Keeps from v1.3
 
 The following v1.3 decisions remain authoritative and are carried forward unchanged:
 
@@ -51,13 +51,13 @@ The following v1.3 decisions remain authoritative and are carried forward unchan
 - Vendor and subprocessor management with GDPR Article 28 alignment
 - ITIL v4 incident response, change management, and problem tracking
 
-v1.4 amends these sections with agent-readiness and contract-plane integration but does not replace them.
+v2.0 amends these sections with agent-readiness and contract-plane integration but does not replace them.
 
 ---
 
 ## 4. Document Set Structure
 
-v1.4 publishes as a **document set**, not a single monolithic file. Each specification is self-contained and retrievable by AI agents without loading the full scaffold. The monolithic scaffold (`Enterprise_MultiPlatform_Architecture_Scaffold_v1.4.md`) indexes into the set for human readers who prefer linear reading.
+v2.0 publishes as a **document set**, not a single monolithic file. Each specification is self-contained and retrievable by AI agents without loading the full scaffold. The monolithic scaffold (`Enterprise_MultiPlatform_Architecture_Scaffold_v2.0.md`) indexes into the set for human readers who prefer linear reading.
 
 ### 4.1 Constitutional Layer (Foundation)
 
@@ -80,7 +80,7 @@ v1.4 publishes as a **document set**, not a single monolithic file. Each specifi
 | # | Document | Purpose |
 |---|----------|---------|
 | 07 | Edge, NATS, and Flutter Clients | Edge node deployment class, NATS JetStream leaf nodes, Go aggregator / Flutter client pattern |
-| 08 | Event-Driven Architecture (v1.4 revision) | Updated event bus selection with NATS JetStream as primary |
+| 08 | Event-Driven Architecture (v2.0 revision) | Updated event bus selection with NATS JetStream as primary |
 | 09 | Identity, Delegation, and Cryptographic Authority | DID-based identity, explicit delegation chains, per-request signatures |
 
 ### 4.4 Preserved Sections (v1.3 carried forward with amendments)
@@ -104,7 +104,7 @@ The following v1.3 sections remain in the monolithic scaffold with targeted amen
 
 ## 5. Stakeholder Guide
 
-| Role | Primary v1.4 Sections | What Changed |
+| Role | Primary v2.0 Sections | What Changed |
 |------|----------------------|--------------|
 | **CTO/CIO** | 02 (SDK-First), 04 (API Architecture), 07 (Edge/NATS), 08 (Events) | Architecture tentpoles; SDK is now the product |
 | **CISO** | 03 (Contract-Based Trust), 06 (Agentic Governance), 09 (Identity) | Trust model is cryptographic; agents operate under explicit contracts |
@@ -117,7 +117,7 @@ The following v1.3 sections remain in the monolithic scaffold with targeted amen
 
 ## 6. Implementation Readiness
 
-A platform conforms to EPAS v1.4 when all of the following are demonstrable:
+A platform conforms to EPAS v2.0 when all of the following are demonstrable:
 
 1. **SDK-First Compliance** — Every interface (UI, CLI, automation, agent) consumes the platform through an official SDK. No client calls REST or GraphQL endpoints directly.
 2. **Contract Ledger Operational** — Every mutating operation produces a contract ledger entry before execution begins. Refusals are recorded with signed reasons.
@@ -130,15 +130,15 @@ Partial conformance is acceptable during migration from v1.3. Full conformance i
 
 ---
 
-## 7. EPAS v1.4 Migration from v1.3
+## 7. EPAS v2.0 Migration from v1.3
 
-Existing v1.3 platforms migrate to v1.4 in four phases:
+Existing v1.3 platforms migrate to v2.0 in four phases:
 
 ### 7.1 Phase 1 — Documentation and Tenets (Weeks 1–2)
 
 - Add `llms.txt` and `CLAUDE.md` (or equivalent) to every repository
 - Convert existing documentation to RAG-optimized markdown rules
-- Update architectural tenets file to the v1.4 list
+- Update architectural tenets file to the v2.0 list
 
 ### 7.2 Phase 2 — SDK-First Migration (Weeks 3–8)
 
@@ -165,26 +165,26 @@ Existing v1.3 platforms migrate to v1.4 in four phases:
 
 ## 8. Non-Goals
 
-EPAS v1.4 does not:
+EPAS v2.0 does not:
 
 - Provide legal advice or regulatory certification
 - Prescribe specific vendors, products, or open-source projects
 - Encode business logic for specific industries
 - Replace internal policies, engineering standards, or security programs
 
-v1.4 is a technical scaffold aligned with internal policies, legal opinions, and regulatory programs. Organizations adapt v1.4 to their specific context.
+v2.0 is a technical scaffold aligned with internal policies, legal opinions, and regulatory programs. Organizations adapt v2.0 to their specific context.
 
 ---
 
 ## 9. Authorship and Control
 
 **Document Owner:** Platform Architecture
-**Control:** Changes to Core Principles, Architectural Tenets, Contract Model, or SDK Architecture require explicit approval per the v1.4 agent context file (`1.4 Planning/CLAUDE.md`).
+**Control:** Changes to Core Principles, Architectural Tenets, Contract Model, or SDK Architecture require explicit approval per the repository's agent context file (`1.4 Planning/CLAUDE.md`; the file was authored under the v1.4 working title and remains the authoritative guardrail for v2.0 drafting until relocated to the repository root).
 
 ---
 
-## 10. EPAS v1.4 Relationship to Reference Implementations
+## 10. EPAS v2.0 Relationship to Reference Implementations
 
-EPAS v1.4 is informed by one or more reference implementations that have materially influenced the specification. Reference implementations are **not named** in v1.4 specification text. The specification remains vendor-neutral and deployment-neutral.
+EPAS v2.0 is informed by one or more reference implementations that have materially influenced the specification. Reference implementations are **not named** in v2.0 specification text. The specification remains vendor-neutral and deployment-neutral.
 
-Reference implementations may publish their own mapping documents that trace EPAS v1.4 requirements to their specific services, technologies, and naming conventions. Such mapping documents are out of scope for this repository.
+Reference implementations may publish their own mapping documents that trace EPAS v2.0 requirements to their specific services, technologies, and naming conventions. Such mapping documents are out of scope for this repository.
