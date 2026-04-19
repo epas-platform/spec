@@ -449,7 +449,7 @@ Ledger Entries (8.2)
 └────────────────────────┘
 ```
 
-Step 6 closes the loop: the internal ledger records the external anchor's identifier (e.g., on-chain transaction hash, block number), so any subsequent audit can trace **DAML / ledger transaction → contract event → event hash → Merkle proof → on-chain anchor**, or the equivalent chain for whichever substrate was selected.
+Step 6 closes the loop: the internal ledger records the external anchor's identifier (e.g., on-chain transaction hash, block number), so any subsequent audit can trace **substrate transaction → contract event → event hash → Merkle proof → on-chain anchor** (the specific trace shape depends on the substrate class selected in Section 8.2).
 
 #### 8.3.3 Anchoring Substrate
 

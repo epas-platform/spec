@@ -27,7 +27,7 @@ v1.4 amends this to:
 - **NATS JetStream is the recommended primary event backbone** for new deployments.
 - **Kafka and Redpanda remain permitted** where regulatory retention requirements favor Kafka's archival ecosystem, or where existing Kafka deployments have substantial investment.
 - **CloudEvents and AsyncAPI remain mandatory** without change.
-- **Every event MUST carry a `contract_id`** — this is new in v1.4 and is non-negotiable.
+- **Every event MUST carry a `contractid` CloudEvents extension attribute** — this is new in v1.4 and is non-negotiable. CloudEvents 1.0 requires extension attribute names to be lowercase with no separators; the same identifier appears as `contract_id` in JSON envelopes and prose, and as `contractid` when it is the CloudEvents attribute name.
 
 v1.3 Phase 1 / Phase 2 language is retired. New deployments select a backbone on merit, not on phase.
 
@@ -117,7 +117,7 @@ Kafka and Redpanda remain permitted where:
 
 Platforms using Kafka or Redpanda:
 
-- MUST satisfy all other requirements of this specification (CloudEvents envelope, AsyncAPI contracts, `contract_id` on every event).
+- MUST satisfy all other requirements of this specification (CloudEvents envelope, AsyncAPI contracts, `contractid` extension attribute on every event).
 - SHOULD document the justification in `conformance.yaml`.
 - SHOULD evaluate NATS JetStream at each major architectural review.
 

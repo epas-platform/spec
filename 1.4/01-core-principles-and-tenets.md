@@ -115,6 +115,7 @@ architectural_tenets:
   - contract_ledger_externally_anchored     # Merkle roots to operator-independent medium
   - contract_modeling_declared              # Formal or envelope-based, stated in conformance.yaml
   - contract_substrate_declared             # Permissioned / CT-log / event-store / witness
+  - contract_id_on_every_event              # Every event carries its originating contract reference
   - refusal_is_first_class
   - contract_envelope_signed
 
@@ -123,6 +124,8 @@ architectural_tenets:
   - agent_operations_classified
   - agent_guardrails_ci_validated
   - agent_guardrails_runtime_enforced
+  - agent_identity_tier_model_implemented   # DID → wallet → scoped-authority progression per spec 09
+  - per_request_signatures_required         # Authority bound to the specific request, not a bearer token
 
   # Edge and Resilience (NEW in v1.4)
   - edge_deployment_supported

@@ -92,6 +92,7 @@ tenets:
   contract_ledger_externally_anchored: "in_progress"
   contract_modeling_declared: true
   contract_substrate_declared: true
+  contract_id_on_every_event: "in_progress"
   refusal_is_first_class: "in_progress"
   contract_envelope_signed: "in_progress"
 
@@ -100,6 +101,8 @@ tenets:
   agent_operations_classified: true
   agent_guardrails_ci_validated: true
   agent_guardrails_runtime_enforced: "in_progress"
+  agent_identity_tier_model_implemented: "in_progress"
+  per_request_signatures_required: "in_progress"
 
   # -- Edge and Resilience (NEW in v1.4) --------------------------
   edge_deployment_supported: false                    # Set true only if deploying to edge
@@ -142,13 +145,14 @@ contract_model:
     independent_verification_documented: true
 
 # ---- API Architecture ---------------------------------------------
+# Tenet status for contract_id_on_every_event is declared in the
+# tenets block above. This section captures API-specific detail only.
 api_architecture:
   command_api_url_pattern: "/t/{tenant}/api/rest/v{version}/{resource}/{id}/commands/{command}"
   query_api_endpoint: "/t/{tenant}/api/graphql/v{version}"
   internal_api_protocol: "grpc"
   internal_api_public: false                          # MUST be false — never exposed outside
   idempotency_keys_required: true
-  contract_id_on_every_event: "in_progress"
 
 # ---- Event bus selection -----------------------------------------
 event_bus:
@@ -184,13 +188,14 @@ edge:
   tactical_bridge_enabled: false
 
 # ---- Identity and Delegation -------------------------------------
+# Tenet status for agent_identity_tier_model_implemented and
+# per_request_signatures_required is declared in the tenets block above.
+# This section captures implementation-specific detail only.
 identity:
   did_method_primary: "did:web"                       # "did:web" | "did:key" | "did:plc"
   did_method_ephemeral: "did:key"
   signature_scheme: "ed25519"                         # Default per specification 09
   workload_identity_system: "spire"                   # "spire" | "cloud_iam" | "other"
-  agent_identity_tier_model_implemented: "in_progress"
-  per_request_signatures_required: "in_progress"
   revocation_propagation_sla: "PT30S"                 # 30 seconds default
 
 # ---- Agentic Governance ------------------------------------------
@@ -290,6 +295,10 @@ pending_tenets:
   - tenet: agent_guardrails_runtime_enforced
     target_date: "2026-11-30"
     owner: "did:web:example.com:users:security-lead"
+    notes: >-
+      Covers both runtime enforcement in Gateway (SDK and Gateway checks)
+      and ledger enforcement (post-hoc audit service). See
+      agentic_governance.enforcement_layers for sub-state.
 
   - tenet: agent_identity_tier_model_implemented
     target_date: "2026-10-31"
@@ -304,14 +313,6 @@ pending_tenets:
     target_date: "2026-09-30"
     owner: "did:web:example.com:users:platform-lead"
     notes: "CloudEvents extension attribute rollout in progress."
-
-  - tenet: runtime_enforcement_in_gateway
-    target_date: "2026-11-30"
-    owner: "did:web:example.com:users:security-lead"
-
-  - tenet: ledger_enforcement_audit_service
-    target_date: "2026-12-15"
-    owner: "did:web:example.com:users:audit-lead"
 
 # ---- Attestation -------------------------------------------------
 # This file, when committed, is a signed declaration of conformance
