@@ -1,0 +1,331 @@
+# EPAS v2.0 Conformance Declaration
+# =================================================================
+# This file declares a repository's conformance to EPAS v2.0.
+# Copy to the repository root as `conformance.yaml` and fill in.
+# CI validates this file on every pull request.
+#
+# Partial conformance is permitted during migration from v1.3.
+# Declare every tenet explicitly; absence of a declaration is
+# treated as non-conformant.
+# =================================================================
+
+# ---- Document metadata --------------------------------------------
+epas_version: "2.0.0"
+repository: "example-corp/example-service"
+declared_by: "did:web:example.com:users:architect-owner"
+declared_at: "2026-04-19T00:00:00Z"
+review_due_by: "2026-07-19T00:00:00Z"        # At most 90 days from declaration
+
+# ---- Conformance state --------------------------------------------
+# overall_state is one of:
+#   - "conformant"       — all required tenets satisfied
+#   - "partial"          — some tenets pending (migration ongoing)
+#   - "non_conformant"   — explicitly declared as not yet aligned
+overall_state: "partial"
+migration_target_date: "2026-12-31"
+
+# ---- Tenet declarations -------------------------------------------
+# Every tenet from specification 01 § 4 is declared below.
+# Values: true | false | "in_progress" | "not_applicable"
+#
+# Use "in_progress" only with an accompanying target date in
+# `pending_tenets` at the bottom of this file.
+tenets:
+
+  # -- Tenancy and Isolation (v1.3, unchanged) --------------------
+  tenant_isolation_by_design: true
+  environment_first_architecture: true
+  business_unit_flexibility: true
+
+  # -- Configuration and Development (v1.3) -----------------------
+  profile_based_environments: true
+  lazy_credential_loading: true
+  environment_agnostic_code: true
+
+  # -- Security and Trust (v1.3) ----------------------------------
+  zero_trust_internal_calls: true
+  defense_in_depth: true
+  mcp_for_tool_integration_only: true
+
+  # -- Orchestration and Events (v1.3) ----------------------------
+  deterministic_orchestration: true
+  event_plane_mandatory: true
+  event_bus_pluggable: true
+
+  # -- AI and Cost (v1.3) -----------------------------------------
+  a2a_cost_tracking_mandatory: true
+  multi_model_by_default: true
+  ai_cost_tracking_built_in: true
+  token_attribution_per_agent: true
+
+  # -- Standards and Operations (v1.3) ----------------------------
+  open_standards_everywhere: true
+  infrastructure_as_code: true
+  local_dev_equals_cloud: true
+  devsecops_and_agentops_required: true
+
+  # -- Compliance and Governance (v1.3) ---------------------------
+  compliance_as_code: true
+  evidence_first: true
+  regulatory_alignment_built_in: true
+  supply_chain_transparency: true
+  itil_v4_service_management: true
+
+  # -- Documentation for Machine Readers (NEW in v2.0) ------------
+  documentation_dual_audience: true
+  llms_txt_mandatory: true
+  agent_context_files_required: true
+  rag_optimized_markdown: "in_progress"
+  machine_readable_by_default: true
+
+  # -- SDK-First Architecture (NEW in v2.0) -----------------------
+  sdk_first_architecture: "in_progress"
+  no_direct_api_consumption: "in_progress"
+  openapi_sdk_generation: false
+  sdk_version_independent_of_api: true
+
+  # -- Contract-Based Trust (NEW in v2.0) -------------------------
+  contract_based_execution: "in_progress"
+  contract_ledger_mandatory: "in_progress"
+  contract_ledger_append_only: true
+  contract_ledger_tamper_evident: "in_progress"
+  contract_ledger_externally_anchored: "in_progress"
+  contract_modeling_declared: true
+  contract_substrate_declared: true
+  contract_id_on_every_event: "in_progress"
+  refusal_is_first_class: "in_progress"
+  contract_envelope_signed: "in_progress"
+
+  # -- Agentic Governance (NEW in v2.0) ---------------------------
+  agentic_governance_enabled: "in_progress"
+  agent_operations_classified: true
+  agent_guardrails_ci_validated: true
+  agent_guardrails_runtime_enforced: "in_progress"
+  agent_identity_tier_model_implemented: "in_progress"
+  per_request_signatures_required: "in_progress"
+
+  # -- Edge and Resilience (NEW in v2.0) --------------------------
+  edge_deployment_supported: false                    # Set true only if deploying to edge
+  event_replay_on_reconnect: "not_applicable"         # Required when edge_deployment_supported: true
+  offline_tolerant_execution: "not_applicable"        # Required when edge_deployment_supported: true
+
+# ---- Contract-Based Trust selections ------------------------------
+# Required when contract_based_execution is "true" or "in_progress".
+contract_model:
+
+  # Contract modeling approach per specification 03 § 8.1
+  modeling:
+    approach: "envelope"                              # "formal" | "envelope"
+    reference_implementation: "internal-envelope-v1"
+    justification: >-
+      Single-operator deployment. Formal modeling (8.1.1)
+      is planned for the multi-party phase.
+
+  # Ledger substrate per specification 03 § 8.2
+  substrate:
+    class: "immutable_event_store"                    # "permissioned_formal_contract_ledger"
+                                                      # | "ct_style_log"
+                                                      # | "immutable_event_store"
+                                                      # | "witness_network"
+    implementation: "nats-jetstream-audit-stream"
+    hash_chain_enabled: true
+    dedicated_stream: true                            # Contracts separated from activity events
+    independent_verifier_tool: "tools/verify-ledger"
+
+  # External anchoring per specification 03 § 8.3 (REQUIRED)
+  anchoring:
+    external_medium: "ethereum_l2"                    # "public_blockchain" | "notarization"
+                                                      # | "witness_network" | "regulatory_submission"
+    blockchain_network: "base-mainnet"                # When external_medium includes a chain
+    anchor_contract_address: "0x0000000000000000000000000000000000000000"
+    granularity: "tenant_scoped"                      # "global" | "tenant_scoped"
+    interval: "PT1H"                                  # ISO 8601 duration (hourly)
+    retention_years: 7
+    proof_package_tool: "tools/export-proof-package"
+    independent_verification_documented: true
+
+# ---- API Architecture ---------------------------------------------
+# Tenet status for contract_id_on_every_event is declared in the
+# tenets block above. This section captures API-specific detail only.
+api_architecture:
+  command_api_url_pattern: "/t/{tenant}/api/rest/v{version}/{resource}/{id}/commands/{command}"
+  query_api_endpoint: "/t/{tenant}/api/graphql/v{version}"
+  internal_api_protocol: "grpc"
+  internal_api_public: false                          # MUST be false — never exposed outside
+  idempotency_keys_required: true
+
+# ---- Event bus selection -----------------------------------------
+event_bus:
+  primary: "nats_jetstream"                           # "nats_jetstream" | "kafka" | "redpanda"
+                                                      # | "pulsar" | "cloud_managed" | "other"
+  justification: null                                 # Required if not "nats_jetstream"
+  cloudevents_version: "1.0"
+  asyncapi_version: "3.0"
+  extension_attributes_present:
+    - contractid
+    - operationid
+    - correlationid
+    - causationid
+    - tenant
+    - environment
+    - schemaid
+    - schemaversion
+  dead_letter_policy_defined: true
+  schema_registry_url: "https://schema.example.com/registry"
+
+# ---- Edge deployment ---------------------------------------------
+# Populate only when edge_deployment_supported is true.
+edge:
+  enabled: false
+  leaf_node_pattern: null                             # "nats_jetstream_leaf" when enabled
+  local_streams:
+    events: null                                      # e.g., "edge.{node_id}.events"
+    contracts_tentative: null
+    central_inbox: null
+  reconciliation_policy: null                         # "central_wins" | "earliest_timestamp"
+                                                      # | "tenant_defined"
+  flutter_client_fsm_library: null                    # When Flutter clients are deployed
+  tactical_bridge_enabled: false
+
+# ---- Identity and Delegation -------------------------------------
+# Tenet status for agent_identity_tier_model_implemented and
+# per_request_signatures_required is declared in the tenets block above.
+# This section captures implementation-specific detail only.
+identity:
+  did_method_primary: "did:web"                       # "did:web" | "did:key" | "did:plc"
+  did_method_ephemeral: "did:key"
+  signature_scheme: "ed25519"                         # Default per specification 09
+  workload_identity_system: "spire"                   # "spire" | "cloud_iam" | "other"
+  revocation_propagation_sla: "PT30S"                 # 30 seconds default
+
+# ---- Agentic Governance ------------------------------------------
+agentic_governance:
+  policy_path: ".governance/agentic.yaml"
+  policy_version: "1.0.0"
+  policy_signed_by:
+    - "did:web:example.com:governance:owner-primary"
+    - "did:web:example.com:governance:owner-secondary"
+  enforcement_layers:
+    soft_enforcement_in_claude_md: true
+    ci_enforcement_rules: true
+    runtime_enforcement_in_gateway: "in_progress"
+    ledger_enforcement_audit_service: "in_progress"
+  approval_routing: "slack-and-email"
+  emergency_override_authority_did: "did:web:example.com:governance:override-committee"
+
+# ---- Documentation -----------------------------------------------
+documentation:
+  llms_txt_path: "/llms.txt"
+  llms_txt_validated_in_ci: true
+  claude_md_path: "/CLAUDE.md"
+  cursor_rules_present: false                         # Set true if team uses Cursor
+  copilot_instructions_present: false
+  mcp_tools_doc_path: "/docs/mcp-tools.md"
+  rag_lint_in_ci: true
+  markdownlint_rule_set: "epas-v2.0"
+
+# ---- Package structure -------------------------------------------
+packages:
+  api_package_present: true
+  sdk_packages_present:
+    - language: "python"
+      path: "packages/sdk/python"
+    - language: "typescript"
+      path: "packages/sdk/typescript"
+  mcp_package_present: true
+  cli_package_present: true
+  web_package_present: false
+
+# ---- Pending tenets (for partial conformance declarations) -------
+# List every tenet above that is set to "in_progress", with a
+# target date and owner. CI rejects partial conformance without
+# matching pending_tenets entries.
+pending_tenets:
+
+  - tenet: rag_optimized_markdown
+    target_date: "2026-06-30"
+    owner: "did:web:example.com:users:docs-lead"
+    notes: "RAG-readiness linter in CI; existing docs under migration."
+
+  - tenet: sdk_first_architecture
+    target_date: "2026-09-30"
+    owner: "did:web:example.com:users:platform-lead"
+    notes: "CLI and MCP server migration in progress; UI still calls REST directly."
+
+  - tenet: no_direct_api_consumption
+    target_date: "2026-09-30"
+    owner: "did:web:example.com:users:platform-lead"
+    notes: "Blocked on SDK parity with UI use cases."
+
+  - tenet: contract_based_execution
+    target_date: "2026-11-30"
+    owner: "did:web:example.com:users:trust-architect"
+    notes: "Ledger substrate selection finalized; integration with Gateway in flight."
+
+  - tenet: contract_ledger_mandatory
+    target_date: "2026-11-30"
+    owner: "did:web:example.com:users:trust-architect"
+    notes: "Paired with contract_based_execution."
+
+  - tenet: contract_ledger_tamper_evident
+    target_date: "2026-10-31"
+    owner: "did:web:example.com:users:trust-architect"
+    notes: "Hash-chain implementation complete; audit of canonicalization pending."
+
+  - tenet: contract_ledger_externally_anchored
+    target_date: "2026-12-15"
+    owner: "did:web:example.com:users:trust-architect"
+    notes: "Anchor contract deployed to L2; production anchoring schedule pending."
+
+  - tenet: refusal_is_first_class
+    target_date: "2026-09-30"
+    owner: "did:web:example.com:users:sdk-lead"
+    notes: "SDK refactor in flight; TypeScript binding done, Python next."
+
+  - tenet: contract_envelope_signed
+    target_date: "2026-11-30"
+    owner: "did:web:example.com:users:trust-architect"
+    notes: "Requires Ed25519 keypair provisioning for all executors."
+
+  - tenet: agentic_governance_enabled
+    target_date: "2026-10-31"
+    owner: "did:web:example.com:users:security-lead"
+    notes: "Classification policy drafted; runtime enforcement in design."
+
+  - tenet: agent_guardrails_runtime_enforced
+    target_date: "2026-11-30"
+    owner: "did:web:example.com:users:security-lead"
+    notes: >-
+      Covers both runtime enforcement in Gateway (SDK and Gateway checks)
+      and ledger enforcement (post-hoc audit service). See
+      agentic_governance.enforcement_layers for sub-state.
+
+  - tenet: agent_identity_tier_model_implemented
+    target_date: "2026-10-31"
+    owner: "did:web:example.com:users:identity-lead"
+
+  - tenet: per_request_signatures_required
+    target_date: "2026-11-30"
+    owner: "did:web:example.com:users:identity-lead"
+    notes: "SDK changes required; coordinated with refusal_is_first_class."
+
+  - tenet: contract_id_on_every_event
+    target_date: "2026-09-30"
+    owner: "did:web:example.com:users:platform-lead"
+    notes: "CloudEvents extension attribute rollout in progress."
+
+# ---- Attestation -------------------------------------------------
+# This file, when committed, is a signed declaration of conformance
+# state. A ledger entry (specification 03) may be produced per
+# declaration change.
+attestation:
+  declaration_hash: null                              # Computed by CI; SHA-256 of this file
+                                                      # excluding the attestation block
+  declaration_ledger_entry_id: null                   # Set when the declaration is
+                                                      # recorded on the contract ledger
+  signed_by:
+    - did: "did:web:example.com:users:architect-owner"
+      signature: null                                 # Set on commit by signing hook
+    - did: "did:web:example.com:governance:owner-primary"
+      signature: null
+  signed_at: null
