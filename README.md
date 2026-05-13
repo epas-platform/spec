@@ -1,3 +1,18 @@
+# EPAS Spec Repository
+
+This repository now carries both the v2.0 constitutional spec set and the v2.1 profile-layer spec set.
+
+## Current Release
+
+| Version | Status | Location |
+|---------|--------|----------|
+| v2.1 | Draft release branch | [`2.1/`](./2.1/) |
+| v2.0 | Published spec set | [`2.0/`](./2.0/) |
+
+The remainder of this file preserves the historical v1.3/v2.0 delivery summary for reference.
+
+---
+
 # Enterprise Architecture Scaffold v1.3.0 - Delivery Summary
 
 **Date**: November 29, 2025  
@@ -254,4 +269,3 @@ This SAAA project implements ~60% of the Enterprise Architecture Scaffold:
 ---
 
 **Enterprise Multi‑Platform Architecture Scaffold v1.3.0 — Delivery Complete**
-
