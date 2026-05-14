@@ -1,0 +1,236 @@
+{
+  "$schema": "./schemas/profile-catalog.schema.json",
+  "schema_version": "epas.profile-catalog/2.1-draft",
+  "catalog_id": "epas-v2.1-required-bundles",
+  "title": "EPAS v2.1 Required Profile Bundle Catalog",
+  "status": "draft",
+  "owner": "EPAS Architecture",
+  "updated_at": "2026-05-14T00:00:00Z",
+  "description": "Initial draft catalog of required EPAS v2.1 named bundles.",
+  "bundles": [
+    {
+      "bundle_id": "relational_internal_prototype",
+      "status": "draft",
+      "description": "Local or exploratory relational-operational starter for internal tools.",
+      "composed_from": {
+        "lifecycle": "prototype",
+        "audience": "internal_tool",
+        "environment": "local_dev",
+        "governance": "g0_exploratory",
+        "infrastructure": "i0_local_compose",
+        "data_model": "relational_operational",
+        "delivery": "sdk_first",
+        "architecture": "modular_monolith",
+        "architecture_traits": [
+          "event_driven"
+        ]
+      },
+      "reference_stack_family": "relational_internal_platform",
+      "notes": "Draft bundle for the current relational starter path. A dedicated relational prototype reference stack may replace this reference family."
+    },
+    {
+      "bundle_id": "relational_internal_demo",
+      "status": "draft",
+      "description": "Polished relational-operational demo for shared internal platform review.",
+      "composed_from": {
+        "lifecycle": "demo",
+        "audience": "internal_platform",
+        "environment": "shared_dev",
+        "governance": "g1_guided",
+        "infrastructure": "i1_simple_runtime",
+        "data_model": "relational_operational",
+        "delivery": "sdk_first",
+        "architecture": "modular_monolith",
+        "architecture_traits": [
+          "event_driven"
+        ]
+      },
+      "reference_stack_family": "relational_internal_platform",
+      "notes": "Requires visible lifecycle states and durable demo records, but may keep lightweight governance."
+    },
+    {
+      "bundle_id": "relational_customer_mvp",
+      "status": "draft",
+      "description": "Customer-facing MVP for conventional relational product surfaces.",
+      "composed_from": {
+        "lifecycle": "mvp",
+        "audience": "customer_facing",
+        "environment": "staging_uat",
+        "governance": "g1_guided",
+        "infrastructure": "i2_platform_runtime",
+        "data_model": "relational_operational",
+        "delivery": "sdk_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "customer_data_sensitive"
+        ]
+      },
+      "reference_stack_family": "customer_product_standard",
+      "notes": "Real authentication and durable execution records are required at this lifecycle."
+    },
+    {
+      "bundle_id": "relational_customer_production",
+      "status": "draft",
+      "description": "Production relational-operational customer product profile.",
+      "composed_from": {
+        "lifecycle": "production",
+        "audience": "customer_facing",
+        "environment": "production",
+        "governance": "g2_operational",
+        "infrastructure": "i2_platform_runtime",
+        "data_model": "relational_operational",
+        "delivery": "sdk_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "customer_data_sensitive"
+        ]
+      },
+      "reference_stack_family": "customer_product_standard",
+      "notes": "Production control realization must be full; customer-sensitive overlay increases evidence and retention expectations."
+    },
+    {
+      "bundle_id": "entity_native_internal_prototype",
+      "status": "draft",
+      "description": "Entity-and-relationship-native prototype for internal agent-centric systems.",
+      "composed_from": {
+        "lifecycle": "prototype",
+        "audience": "internal_platform",
+        "environment": "shared_dev",
+        "governance": "g0_exploratory",
+        "infrastructure": "i0_local_compose",
+        "data_model": "entity_relationship_native",
+        "delivery": "agent_first",
+        "architecture": "modular_monolith",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "entity_native_agentic"
+        ]
+      },
+      "reference_stack_family": "entity_native_agentic_prototype",
+      "notes": "SurrealDB is the default reference database for this bundle family."
+    },
+    {
+      "bundle_id": "entity_native_internal_demo",
+      "status": "draft",
+      "description": "Polished internal demo for entity-native agent-centric systems.",
+      "composed_from": {
+        "lifecycle": "demo",
+        "audience": "internal_platform",
+        "environment": "shared_dev",
+        "governance": "g1_guided",
+        "infrastructure": "i1_simple_runtime",
+        "data_model": "entity_relationship_native",
+        "delivery": "agent_first",
+        "architecture": "modular_monolith",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "entity_native_agentic"
+        ]
+      },
+      "reference_stack_family": "entity_native_agentic_prototype",
+      "notes": "Demo must expose real lifecycle states while keeping the agent/entity model central."
+    },
+    {
+      "bundle_id": "entity_native_customer_mvp",
+      "status": "draft",
+      "description": "Customer-facing MVP for entity-native agent-centric products.",
+      "composed_from": {
+        "lifecycle": "mvp",
+        "audience": "customer_facing",
+        "environment": "staging_uat",
+        "governance": "g2_operational",
+        "infrastructure": "i2_platform_runtime",
+        "data_model": "entity_relationship_native",
+        "delivery": "agent_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "entity_native_agentic",
+          "customer_data_sensitive"
+        ]
+      },
+      "reference_stack_family": "entity_native_agentic_mvp",
+      "notes": "Uses the entity-native MVP reference stack with stronger customer-facing auth and evidence posture."
+    },
+    {
+      "bundle_id": "entity_native_customer_production",
+      "status": "draft",
+      "description": "Production customer-facing entity-native agent-centric profile.",
+      "composed_from": {
+        "lifecycle": "production",
+        "audience": "customer_facing",
+        "environment": "production",
+        "governance": "g2_operational",
+        "infrastructure": "i2_platform_runtime",
+        "data_model": "entity_relationship_native",
+        "delivery": "agent_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "entity_native_agentic",
+          "customer_data_sensitive"
+        ]
+      },
+      "reference_stack_family": "customer_product_standard",
+      "notes": "Customer production profile; regulated deployments should use regulated_production_assured instead."
+    },
+    {
+      "bundle_id": "partner_embedded_mvp",
+      "status": "draft",
+      "description": "Partner-embedded MVP where SDK and integration ergonomics are the primary product boundary.",
+      "composed_from": {
+        "lifecycle": "mvp",
+        "audience": "partner_embedded",
+        "environment": "staging_uat",
+        "governance": "g2_operational",
+        "infrastructure": "i2_platform_runtime",
+        "data_model": "relational_operational",
+        "delivery": "integration_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ]
+      },
+      "reference_stack_family": "customer_product_standard",
+      "notes": "Draft partner profile until EPAS defines a dedicated partner reference stack."
+    },
+    {
+      "bundle_id": "regulated_production_assured",
+      "status": "draft",
+      "description": "High-assurance regulated production profile with strongest governance and evidence posture.",
+      "composed_from": {
+        "lifecycle": "production",
+        "audience": "customer_facing",
+        "environment": "production",
+        "governance": "g3_assured",
+        "infrastructure": "i3_enterprise_multi_env",
+        "data_model": "hybrid_multimodal",
+        "delivery": "sdk_first",
+        "architecture": "service_oriented",
+        "architecture_traits": [
+          "event_driven"
+        ],
+        "overlays": [
+          "regulated",
+          "customer_data_sensitive"
+        ]
+      },
+      "reference_stack_family": "regulated_production_assured",
+      "notes": "Requires explicit evidence, retention, identity, delegation, approval, and contract-plane rigor."
+    }
+  ]
+}

@@ -362,6 +362,8 @@ composed_from:
 
 Bundles are permitted for reuse. Bundles MUST remain reducible to the canonical matrix.
 
+The initial draft bundle catalog is defined in [05-profile-bundles.md](./05-profile-bundles.md) and [profile-catalog.draft.json](./profile-catalog.draft.json).
+
 ---
 
 ## 15. Illegal Combinations

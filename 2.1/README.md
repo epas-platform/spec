@@ -15,6 +15,7 @@ This structure serves two readers equally: human architects who need a release-g
 - Read [02-profile-schemas.md](./02-profile-schemas.md) when implementing validation or generating declarations.
 - Read [03-reference-stacks.md](./03-reference-stacks.md) when selecting a technology stack family.
 - Read [04-migration-and-conformance.md](./04-migration-and-conformance.md) when moving an implementation into v2.1 conformance.
+- Read [05-profile-bundles.md](./05-profile-bundles.md) when choosing a reusable named bundle.
 
 ---
 
@@ -27,6 +28,7 @@ This structure serves two readers equally: human architects who need a release-g
 | 02 | [EPAS Profile Schemas](./02-profile-schemas.md) | Defines machine-readable schema requirements and declaration structure | Draft |
 | 03 | [EPAS Reference Stacks](./03-reference-stacks.md) | Defines recommended implementation stacks by profile family | Draft |
 | 04 | [EPAS Migration and Conformance](./04-migration-and-conformance.md) | Defines migration and conformance rules for profile adoption | Draft |
+| 05 | [EPAS Profile Bundles](./05-profile-bundles.md) | Defines the initial required named bundle catalog | Draft |
 
 ## v2.1 Schema Artifacts
 
@@ -36,6 +38,7 @@ This structure serves two readers equally: human architects who need a release-g
 | [schemas/profile-catalog.schema.json](./schemas/profile-catalog.schema.json) | JSON Schema for reusable profile catalogs and named bundles |
 | [schemas/profile-rules.schema.json](./schemas/profile-rules.schema.json) | JSON Schema for profile legality and cross-field validation rules |
 | [schemas/profile-declaration.example.yaml](./schemas/profile-declaration.example.yaml) | Human-readable example declaration |
+| [profile-catalog.draft.json](./profile-catalog.draft.json) | Draft catalog of required reusable profile bundles |
 
 ---
 
