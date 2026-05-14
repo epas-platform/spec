@@ -1,0 +1,154 @@
+schema_version: "epas.profile/2.1-draft"
+
+document:
+  id: "profile-entity-native-prototype-internal-dev"
+  title: "Entity-Native Internal Prototype Profile"
+  status: "draft"
+  owner: "Platform Architecture"
+  updated_at: "2026-05-13T00:00:00Z"
+
+epas:
+  base_version: "2.0.0"
+  profile_version: "2.1.0"
+
+profile:
+  profile_id: "entity-native-internal-prototype-dev"
+  description: "Internal prototype profile for an entity-native agent-centric system."
+  composed_from:
+    lifecycle: "prototype"
+    audience: "internal_platform"
+    environment: "shared_dev"
+    governance: "g0_exploratory"
+    infrastructure: "i0_local_compose"
+    data_model: "entity_relationship_native"
+    delivery: "sdk_first"
+    architecture: "modular_monolith"
+    architecture_traits:
+      - "event_driven"
+    overlays:
+      - "entity_native_agentic"
+
+classification:
+  primary_use_case: "agent-centric platform"
+  tenant_mode: "single_tenant"
+  sensitivity: "internal_non_sensitive"
+  edge_required: false
+  offline_required: false
+
+principles:
+  inherited_from_epas_2_0: true
+  non_waivable:
+    - machine_readable_by_default
+    - sdk_first_architecture
+    - refusal_is_first_class
+    - event_plane_mandatory
+    - evidence_first
+
+controls:
+  authentication:
+    realization: "simulated"
+    mode: "stubbed"
+    required: false
+    notes: "Stubbed identity permitted for internal prototype use outside production."
+  delegation:
+    realization: "simulated"
+    mode: "none"
+    required: false
+  contract_handling:
+    realization: "simulated"
+    mode: "simulated"
+    required: true
+    requirements:
+      contract_handle_shape_required: true
+      refusal_reason_required: true
+      append_only_contract_record_required: true
+  governance:
+    realization: "lightweight"
+    mode: "lightweight_policy"
+    required: true
+    requirements:
+      operation_classification_required: true
+      prohibited_operations_required: true
+  events:
+    realization: "lightweight"
+    mode: "database_backed_event_log"
+    required: true
+    requirements:
+      run_lifecycle_events_required: true
+      operation_id_on_every_event: true
+      contract_id_on_every_event: false
+  documentation:
+    llms_txt_required: true
+    agent_context_file_required: true
+    conformance_file_required: true
+    profile_declaration_required: true
+
+technology:
+  ui:
+    default:
+      framework: "nextjs"
+      language: "typescript"
+  backend:
+    default:
+      framework: "fastapi"
+      language: "python"
+  database:
+    default:
+      engine: "surrealdb"
+      rationale: "Default for entity-native and relationship-native agent-centric systems."
+    alternatives:
+      - engine: "postgresql"
+        recommended_for:
+          - "conventional_enterprise_applications"
+        justification: "Default for relational-operational systems."
+  sdk:
+    required: true
+    required_languages:
+      - "typescript"
+      - "python"
+  realtime:
+    default:
+      mode: "sse"
+  queueing:
+    default:
+      mode: "database_backed_jobs"
+  infrastructure:
+    default:
+      mode: "docker_compose"
+
+reference_stack:
+  family_id: "entity_native_agentic_prototype"
+  name: "entity-native-prototype-stack"
+  selection_status: "default"
+  components:
+    ui: "Next.js + TypeScript"
+    backend: "FastAPI"
+    database: "SurrealDB"
+    sdk_web: "TypeScript SDK"
+    sdk_automation: "Python SDK"
+    events: "DB-backed event log"
+    realtime: "SSE"
+    infra: "Docker Compose"
+
+conformance:
+  overall_state: "partial"
+  required_declarations:
+    - "lifecycle"
+    - "audience"
+    - "environment"
+    - "governance"
+    - "infrastructure"
+    - "data_model"
+    - "delivery"
+    - "architecture"
+  waivers: []
+  pending_controls:
+    - control: "full_identity_and_delegation"
+      target_phase: "mvp"
+    - control: "cryptographic_contract_signatures"
+      target_phase: "mvp"
+    - control: "event_plane_migration"
+      target_phase: "mvp"
+      notes: "Move from DB-backed event log to NATS JetStream."
+
+extensions: {}
