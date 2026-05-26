@@ -1,271 +1,105 @@
-# EPAS Spec Repository
+# EPAS — Enterprise Platform Architecture Specification
 
-This repository now carries both the v2.0 constitutional spec set and the v2.1 profile-layer spec set.
+> A proven enterprise blueprint for building scalable, reliable, performative, and cost-efficient SaaS platforms.
 
-## Current Release
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![Spec: v2.0](https://img.shields.io/badge/spec-v2.0-green.svg)](./2.0/)
+[![Status: Published](https://img.shields.io/badge/status-published-success.svg)](./2.0/00-overview.md)
+
+Open-source · vendor-neutral · machine-checkable conformance.
+
+---
+
+## What This Is
+
+EPAS is a normative, version-controlled architecture specification for enterprise SaaS platforms. It codifies the patterns, controls, and decisions required to ship a multi-tenant, multi-region, AI-capable platform that enterprises will buy and auditors will accept.
+
+The specification is **vendor-neutral** in spec text — no cloud, language, or model is privileged — and **mechanically enforced**: every architectural tenet is validated at compile / CI / deploy / runtime. Controls that live only in documentation are non-conformant.
+
+## Why It Exists
+
+Cloud Well-Architected frameworks were written for stateless web services. AI governance documents were written by lawyers. The result in most organizations is a stitched-together stack of cloud pillars, vendor patterns, and bolt-on compliance — coherent in slides, brittle in production, expensive in audit.
+
+EPAS is the integrated specification that closes the gap. One document set covers tenancy, identity, APIs, events, observability, FinOps, AI governance, security, compliance, DR/BC, ITIL operations, and developer experience.
+
+## Releases
 
 | Version | Status | Location |
-|---------|--------|----------|
+|---|---|---|
 | v2.1 | Draft release branch | [`2.1/`](./2.1/) |
-| v2.0 | Published spec set | [`2.0/`](./2.0/) |
+| v2.0 | Published spec set (canonical) | [`2.0/`](./2.0/) |
+| v1.3 | Production-ready scaffold | [`Enterprise_MultiPlatform_Architecture_Scaffold.md`](./Enterprise_MultiPlatform_Architecture_Scaffold.md) |
 
-The remainder of this file preserves the historical v1.3/v2.0 delivery summary for reference.
+## The Four Pillars
 
----
+### Scalable
+- Environment-first hierarchy: `environment → org → BU → team → project → resource`
+- Multi-tenant by design; logical or physical isolation per tenant tier
+- SDK-first consumption eliminates per-client integration drift across UI, CLI, automation, and agents
+- Event-driven core; NATS JetStream primary, Kafka / Redpanda permitted with declared justification
+- Edge-capable: formal Edge Node class with leaf-node topology for distributed, offline-tolerant deployments
 
-# Enterprise Architecture Scaffold v1.3.0 - Delivery Summary
+### Reliable
+- Field-validated SLAs: p95 1000–2000ms by tier, 99.95–99.995% uptime
+- Disaster recovery: RPO 15-minute, RTO 4-hour, multi-region replication, quarterly drills
+- ITIL v4 alignment across Incident (P0–P4), Change (CAB / ECAB), and Service Management
+- Machine-readable conformance: ~35 architectural tenets validated in CI on every PR
 
-**Date**: November 29, 2025  
-**Version**: v1.3.0 (Production Ready)  
-**Status**: ✅ Complete
+### Performative
+- OpenTelemetry + LGTM observability with per-entity latency budgets
+- Event substrate selection criteria account for latency, retention, and ecosystem fit — not opinion
+- Capacity planning and scaling triggers specified per workload class
+- Developer experience targets measured: <60 min time-to-first-commit, <4 hr time-to-productive
 
----
+### Cost-Efficient
+- A2A cost attribution with per-agent token tracking and BU chargeback
+- Real-time budget alerts at 75% warning / 95% critical thresholds
+- Multi-model AI strategy: 8 providers with cost-based routing and declared fallback
+- Reference workload achieves 24.5% optimization through caching + routing — full cost model published
 
-## 📦 Deliverables
+## Built-In, Not Bolted On
 
-### 1. Enterprise Architecture Scaffold v1.3.0
-**Location**: 
-- Documents: `Enterprise_Architecture_Scaffold_v1.3.0.md`
+- **Security:** TLS 1.3, AES-256, mTLS, zero-trust internal calls, DID-based identity with signed delegation, SBOM, supply-chain provenance
+- **Compliance:** HIPAA, GDPR, EU AI Act, BIPA, ISO/IEC 42001, NIST AI RMF; vendor management aligned to GDPR Article 28 / SOC 2 / ISO 27001
+- **AI Governance:** agent operations classified as allowed / approval-required / prohibited; enforced at four layers; non-repudiable audit trail via append-only contract ledger
+- **Developer Experience:** one-command setup, LocalStack, mkcert, hot-reload, language-native SDKs (Python / TypeScript / Go)
 
-**Stats**:
-- **4,850+ lines** (180 estimated pages)
-- **18 detailed sections** (100% complete)
-- **7 appendices** (including technology index)
-- **200+ technologies** cataloged
+## Quick Start
 
-### 2. Updated Project README
-**Location**: `./README.md`
+Where to begin depends on your role:
 
-**Updates**:
-- Added Enterprise Architecture Scaffold link
-- Enhanced documentation section
-- Added enterprise context explanation
-- Updated links and resources
+- **Executives** — [v2.0 Overview](./2.0/00-overview.md)
+- **Architects** — [Core Principles & Tenets](./2.0/01-core-principles-and-tenets.md) → [SDK-First](./2.0/02-sdk-first-architecture.md) → [Contract Trust](./2.0/03-contract-based-trust-model.md) → [API Architecture](./2.0/04-api-architecture.md)
+- **Security & Compliance** — [Contract Trust Model](./2.0/03-contract-based-trust-model.md) · [Agentic Governance](./2.0/06-agentic-governance.md) · [Identity & Delegation](./2.0/09-identity-and-delegation.md)
+- **Platform Engineers** — [SDK-First Architecture](./2.0/02-sdk-first-architecture.md) · [API Architecture](./2.0/04-api-architecture.md) · [Documentation for Machine Readers](./2.0/05-documentation-for-machine-readers.md)
+- **Edge / Mobile Engineers** — [Edge, NATS, and Flutter Clients](./2.0/07-edge-nats-flutter.md)
+- **Historical foundation** — [Enterprise Architecture Scaffold v1.3](./Enterprise_MultiPlatform_Architecture_Scaffold.md) · [Technology Index](./TECHNOLOGY_INDEX.md) (~250 technologies cataloged)
 
-### 3. Technology Index
-**Location**: `./TECHNOLOGY_INDEX.txt`
+## Conformance
 
-**Contents**: Complete categorized list of 250+ technologies, frameworks, tools, and standards
+Any platform claiming EPAS conformance publishes a `conformance.yaml` at the repository root. Tenets are enforced across four layers:
 
----
+| Layer | Mechanism |
+|---|---|
+| Compile-time | Type system, linter, code generation |
+| CI-time | Repository validation, schema checks |
+| Deploy-time | Configuration validation, manifest checks |
+| Runtime | Authorization, audit, ledger |
 
-## 📊 Document Structure
+Partial conformance during migration is permitted and explicitly declared. Drift from declared conformance is a platform incident.
 
-### Core Architecture (6 Sections)
-1. Document Control & Audience (RACI)
-2. Core Principles & Architectural Overview
-3. Identity, Scopes, Roles (Environment-First Hierarchy)
-4. Tenant Isolation Strategy
-5. API Strategy (OpenAPI, CloudEvents, MCP)
-6. MCP-First Extensibility & A2A Architecture
+Template: [`2.0/conformance.yaml.template`](./2.0/conformance.yaml.template)
 
-### Cost & AI Management (2 Sections)
-9. **A2A Cost Tracking & FinOps** - Comprehensive inter-agent cost attribution, budget alerts, optimization strategies
-10. **Multi-Model AI Strategy** - 8 LLM providers, cost-based routing, model governance
+## What This Is Not
 
-### Events & Integration (1 Section)
-11. **Event-Driven Architecture** - Kafka, NATS, EventBridge, RabbitMQ, Pulsar comparison with decision matrix
+Not a certification. Not legal advice. Not a vendor pitch deck. Reference implementations exist but are explicitly out of scope for normative documents.
 
-### Operations (3 Sections - ITIL v4 Aligned)
-16. **Incident Response & Breach Notification** - P0-P4 classification, SLA targets, ITIL Major Incident Management
-17. **Disaster Recovery & Business Continuity** - RPO 15min, RTO 4hr, multi-region replication, quarterly DR drills
-20. **Change Management & Release Governance** - CAB/ECAB processes, standard/normal/emergency changes
+## License
 
-### Compliance & Security (2 Sections)
-14. **Regulatory Compliance & AI Governance** - HIPAA, EU AI Act, GDPR, BIPA, ISO/IEC 42001
-15. **Security Architecture & Hardening** - TLS 1.3, AES-256, mTLS, LangGraph/MCP security patterns
+Apache 2.0 — see [`LICENSE`](./LICENSE).
 
-### Vendor & Third-Party (1 Section)
-19. **Vendor & Subprocessor Management** - GDPR Article 28, security questionnaires, DPA requirements
+## Author
 
-### Developer & Performance (2 Sections)
-18. **Performance & Scalability Targets** - Production SLAs (1.5s response, 99.95-99.995% uptime), capacity planning
-21. **Developer Experience & Local Development** - LocalStack, mkcert, hot-reload, one-command setup
+**Nate Walker** — Founder, Ravenhelm. ~20 years in enterprise AI presales, solution architecture, and platform strategy at IPsoft, Amelia, SoundHound, and Quant.ai. Speaker: Gartner, Forrester, NVIDIA GTC, HIMSS, CCW.
 
-### Supporting Content (1 Section)
-12. Observability (OpenTelemetry, LGTM stack)
-13. Compliance & Accessibility
-
----
-
-## 🎯 Key Features & Decisions
-
-### Strategic Decisions
-- **Environment-First Hierarchy**: `environment → org → business_unit → team → project → resource`
-- **Cost Alert Thresholds**: 75% warning, 95% critical
-- **Model Approval**: CAIO (consulted: CISO, CIO; informed: CTO)
-- **Event Bus Strategy**: Kafka Phase 1, NATS Phase 2 (latency optimization)
-- **Business Unit**: P&L-capable but customer-flexible (NOT knowledge domain)
-
-### Technology Choices
-- **Event Bus**: Kafka/Redpanda (Phase 1), NATS/JetStream (Phase 2 - 100ms improvement)
-- **LLM Primary**: Claude Sonnet 4
-- **LLM Fallback**: OpenAI GPT-4o
-- **Voice**: Deepgram Nova-2 (STT), ElevenLabs Turbo v2.5 (TTS)
-- **Identity**: Zitadel + OpenFGA + SPIRE
-- **Observability**: OpenTelemetry + Grafana LGTM stack
-
-### Production SLAs (Field-Validated)
-| Tier | Response Time (p95) | Uptime | Use Case |
-|------|--------------------:|-------:|----------|
-| Standard | 2000ms | 99.95% | Most SaaS customers |
-| Premium | 1500ms | 99.95% | Contractual commitment |
-| Enterprise | 1000ms | 99.995% | Global financial services ($15B+ revenue) |
-
-### Cost Model (2025, 100 Sessions/Month)
-- **Baseline**: $8,500/month ($85/session)
-- **Optimized**: $6,412/month ($64.12/session)
-- **Savings**: 24.5% through caching + multi-model routing
-
----
-
-## 🔒 Sanitization Complete
-
-**Removed**:
-- ❌ All vendor names (Amelia, SoundHound)
-- ❌ All customer names (Thomson Reuters → "Global financial services, $15B revenue")
-
-**Replaced with**:
-- ✅ Generic descriptions ("Enterprise conversational AI architectures 2022-2024")
-- ✅ Anonymized profiles (industry, structure, revenue, employees, regulatory requirements)
-
----
-
-## 📋 Stakeholder Guide
-
-| Role | Key Sections | Appendices |
-|------|--------------|------------|
-| **CFO/COO** | Section 9 (Cost Tracking) | Appendix A (Cost Model) |
-| **CISO** | Section 15 (Security) | Appendix D (Security Checklist) |
-| **CAIO** | Section 10 (Multi-Model AI), Section 14 (AI Governance) | Appendix E (Decisions) |
-| **CTO/CIO** | Section 11 (Event Bus), Section 21 (Developer Experience) | Appendix C (Event Bus Matrix) |
-| **CRO/CLO** | Section 14 (Regulatory Compliance) | Appendix B (Regulatory Checklist) |
-
----
-
-## 🎓 What This Delivers
-
-### For Architecture Teams
-- Complete reference implementation patterns
-- Technology selection criteria (200+ tools evaluated)
-- Real-world SLAs and capacity planning
-- ITIL v4 operational alignment
-
-### For Security Teams
-- Zero-trust architecture (SPIRE/SPIFFE)
-- Encryption standards (TLS 1.3, AES-256)
-- Security questionnaire templates
-- Vendor assessment frameworks
-
-### For Compliance Teams
-- HIPAA, EU AI Act, GDPR, BIPA alignment
-- Evidence matrices (regulation → capability → artifact)
-- Data subject rights implementation
-- Audit trail requirements
-
-### For Finance Teams
-- A2A cost attribution model
-- Per-agent token tracking
-- Chargeback to business units
-- Real-time budget alerts (75%/95% thresholds)
-
-### For Operations Teams
-- ITIL v4 incident management (P0-P4)
-- Change management (CAB/ECAB)
-- DR/BC procedures (RPO 15min, RTO 4hr)
-- Performance SLAs and monitoring
-
----
-
-## 📈 Evolution
-
-| Version | Date | Key Changes |
-|---------|------|-------------|
-| v1.0.0 | - | Initial reference architecture |
-| v1.1.0 | Nov 2025 | A2A architecture, event-driven, initial cost tracking |
-| v1.2.0 | Nov 2025 | AWS-first, environment strategy, security baseline |
-| **v1.3.0** | **Nov 29, 2025** | **Environment-first, comprehensive A2A cost, ITIL v4, regulatory compliance, multi-model AI, DR/BC, vendor management** |
-
----
-
-## 🚀 Implementation Status
-
-### serviceasanagent Project Coverage
-This SAAA project implements ~60% of the Enterprise Architecture Scaffold:
-
-| Category | Implementation | Status |
-|----------|----------------|--------|
-| A2A Architecture | Full | ✅ Complete |
-| MCP Protocol | Full | ✅ Complete |
-| Voice Pipeline | Full | ✅ Complete |
-| State Management | Full | ✅ Complete |
-| Governance Framework | Partial | 🔧 In Progress |
-| Observability | Partial | 🔧 Tracing active, metrics planned |
-| Security | Partial | 🔧 Auth/authz in progress |
-| DR/BC | Not Started | 📋 Planned |
-| Production Kubernetes | Not Started | 📋 Planned |
-
-### Recommended Next Project
-**Agent Foundry** - Focus on multi-tenancy, security, and production hardening (complements SAAA's A2A innovation)
-
----
-
-## 📚 Related Documents
-
-1. **Enterprise_Architecture_Scaffold_v1.3.0.md** - This comprehensive guide
-2. **PROJECT_REPORT.md** - SAAA implementation details
-3. **TECHNOLOGY_INDEX.txt** - Complete tool catalog (250+ technologies)
-4. **README.md** - Project quick start
-5. **Quant - Regulation and Compliance.pdf** - Regulatory alignment guide
-6. **Enterprise DR/BC Templates** - Disaster recovery procedures
-
----
-
-## ✅ Quality Assurance
-
-- [x] All vendor names removed (Amelia, SoundHound)
-- [x] Customer names anonymized (industry profiles only)
-- [x] 2025 pricing updated (+10-15% over 2024)
-- [x] Real-world SLAs validated (1.5s response, 99.95%/99.995% uptime)
-- [x] ITIL v4 alignment verified
-- [x] Technology index complete (250+ tools)
-- [x] All sections detailed (18/18 = 100%)
-- [x] Production-ready status confirmed
-
----
-
-## 📞 Contact
-
-**Document Owner**: Nathan Walker  
-**Email**: nate@ravenhelm.co  
-**Role**: Founder  
-**Organization**: Ravenhelm
-
----
-
-## 🎯 Usage Recommendations
-
-### For RFPs & Customer Presentations
-- Use Section 14 (Regulatory Compliance) for security questionnaires
-- Reference Appendix A (Cost Model) for pricing discussions
-- Use case studies (anonymized) for proof points
-
-### For Internal Planning
-- Use Section 18 (Performance) for capacity planning
-- Use Section 9 (Cost Tracking) for FinOps implementation
-- Use Appendix C (Event Bus Matrix) for technology selection
-
-### For Development Teams
-- Use Section 21 (Developer Experience) for local setup
-- Use Section 11 (Event-Driven) for integration patterns
-- Use Technology Index for framework selection
-
----
-
-**Estimated Value**: $75K-150K consulting deliverable  
-**Time Investment**: 3 days intensive architecture & compliance research  
-**ROI**: 40-80 hours saved per customer RFP (automated questionnaire responses)
-
----
-
-**Enterprise Multi‑Platform Architecture Scaffold v1.3.0 — Delivery Complete**
+📧 [nate@ravenhelm.co](mailto:nate@ravenhelm.co) · 🔗 [github.com/epas-platform/spec](https://github.com/epas-platform/spec)
