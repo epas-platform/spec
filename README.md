@@ -3,51 +3,42 @@
 > A proven enterprise blueprint for building scalable, reliable, performative, and cost-efficient SaaS platforms.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
-[![Spec: v2.0](https://img.shields.io/badge/spec-v2.0-green.svg)](./2.0/)
-[![Status: Published](https://img.shields.io/badge/status-published-success.svg)](./2.0/00-overview.md)
+[![Spec: v1.3](https://img.shields.io/badge/spec-v1.3-green.svg)](./Enterprise_MultiPlatform_Architecture_Scaffold.md)
+[![Status: Production-Ready](https://img.shields.io/badge/status-production--ready-success.svg)](./Enterprise_MultiPlatform_Architecture_Scaffold.md)
 
-Open-source · vendor-neutral · machine-checkable conformance.
+Open-source · vendor-neutral · production-validated.
 
 ---
 
 ## What This Is
 
-EPAS is a normative, version-controlled architecture specification for enterprise SaaS platforms. It codifies the patterns, controls, and decisions required to ship a multi-tenant, multi-region, AI-capable platform that enterprises will buy and auditors will accept.
+EPAS is a comprehensive architecture specification for enterprise SaaS platforms. It codifies the patterns, controls, and decisions required to ship a multi-tenant, multi-region, AI-capable platform that enterprises will buy and auditors will accept.
 
-The specification is **vendor-neutral** in spec text — no cloud, language, or model is privileged — and **mechanically enforced**: every architectural tenet is validated at compile / CI / deploy / runtime. Controls that live only in documentation are non-conformant.
+The specification is **vendor-neutral** in spec text — no cloud, language, or model is privileged — and **production-validated** against real enterprise workloads. 18 sections, 7 appendices, ~250 technologies cataloged.
 
 ## Why It Exists
 
 Cloud Well-Architected frameworks were written for stateless web services. AI governance documents were written by lawyers. The result in most organizations is a stitched-together stack of cloud pillars, vendor patterns, and bolt-on compliance — coherent in slides, brittle in production, expensive in audit.
 
-EPAS is the integrated specification that closes the gap. One document set covers tenancy, identity, APIs, events, observability, FinOps, AI governance, security, compliance, DR/BC, ITIL operations, and developer experience.
-
-## Releases
-
-| Version | Status | Location |
-|---|---|---|
-| v2.1 | Draft release branch | [`2.1/`](./2.1/) |
-| v2.0 | Published spec set (canonical) | [`2.0/`](./2.0/) |
-| v1.3 | Production-ready scaffold | [`Enterprise_MultiPlatform_Architecture_Scaffold.md`](./Enterprise_MultiPlatform_Architecture_Scaffold.md) |
+EPAS closes the gap with one integrated specification covering tenancy, identity, APIs, events, observability, FinOps, AI governance, security, compliance, DR/BC, ITIL operations, and developer experience.
 
 ## The Four Pillars
 
 ### Scalable
 - Environment-first hierarchy: `environment → org → BU → team → project → resource`
 - Multi-tenant by design; logical or physical isolation per tenant tier
-- SDK-first consumption eliminates per-client integration drift across UI, CLI, automation, and agents
-- Event-driven core; NATS JetStream primary, Kafka / Redpanda permitted with declared justification
-- Edge-capable: formal Edge Node class with leaf-node topology for distributed, offline-tolerant deployments
+- MCP-first extensibility and Agent-to-Agent (A2A) architecture
+- Event-driven core with full decision matrix across Kafka, NATS, EventBridge, RabbitMQ, and Pulsar
 
 ### Reliable
 - Field-validated SLAs: p95 1000–2000ms by tier, 99.95–99.995% uptime
 - Disaster recovery: RPO 15-minute, RTO 4-hour, multi-region replication, quarterly drills
 - ITIL v4 alignment across Incident (P0–P4), Change (CAB / ECAB), and Service Management
-- Machine-readable conformance: ~35 architectural tenets validated in CI on every PR
+- Change management governance for standard, normal, and emergency release tracks
 
 ### Performative
 - OpenTelemetry + LGTM observability with per-entity latency budgets
-- Event substrate selection criteria account for latency, retention, and ecosystem fit — not opinion
+- Event substrate selection criteria documented and matrixed — not opinion
 - Capacity planning and scaling triggers specified per workload class
 - Developer experience targets measured: <60 min time-to-first-commit, <4 hr time-to-productive
 
@@ -59,40 +50,40 @@ EPAS is the integrated specification that closes the gap. One document set cover
 
 ## Built-In, Not Bolted On
 
-- **Security:** TLS 1.3, AES-256, mTLS, zero-trust internal calls, DID-based identity with signed delegation, SBOM, supply-chain provenance
+- **Security:** TLS 1.3, AES-256, mTLS, zero-trust internal calls, SPIRE / SPIFFE workload identity, SBOM and supply-chain provenance
 - **Compliance:** HIPAA, GDPR, EU AI Act, BIPA, ISO/IEC 42001, NIST AI RMF; vendor management aligned to GDPR Article 28 / SOC 2 / ISO 27001
-- **AI Governance:** agent operations classified as allowed / approval-required / prohibited; enforced at four layers; non-repudiable audit trail via append-only contract ledger
-- **Developer Experience:** one-command setup, LocalStack, mkcert, hot-reload, language-native SDKs (Python / TypeScript / Go)
+- **AI Governance:** model approval workflow with explicit RACI (CAIO accountable; CISO, CIO consulted), evidence matrices mapping regulation to capability to artifact, audit trail requirements specified
+- **Developer Experience:** one-command setup, LocalStack, mkcert, hot-reload, environment parity
 
 ## Quick Start
 
-Where to begin depends on your role:
+The full specification lives in [`Enterprise_MultiPlatform_Architecture_Scaffold.md`](./Enterprise_MultiPlatform_Architecture_Scaffold.md). Where to begin depends on your role:
 
-- **Executives** — [v2.0 Overview](./2.0/00-overview.md)
-- **Architects** — [Core Principles & Tenets](./2.0/01-core-principles-and-tenets.md) → [SDK-First](./2.0/02-sdk-first-architecture.md) → [Contract Trust](./2.0/03-contract-based-trust-model.md) → [API Architecture](./2.0/04-api-architecture.md)
-- **Security & Compliance** — [Contract Trust Model](./2.0/03-contract-based-trust-model.md) · [Agentic Governance](./2.0/06-agentic-governance.md) · [Identity & Delegation](./2.0/09-identity-and-delegation.md)
-- **Platform Engineers** — [SDK-First Architecture](./2.0/02-sdk-first-architecture.md) · [API Architecture](./2.0/04-api-architecture.md) · [Documentation for Machine Readers](./2.0/05-documentation-for-machine-readers.md)
-- **Edge / Mobile Engineers** — [Edge, NATS, and Flutter Clients](./2.0/07-edge-nats-flutter.md)
-- **Historical foundation** — [Enterprise Architecture Scaffold v1.3](./Enterprise_MultiPlatform_Architecture_Scaffold.md) · [Technology Index](./TECHNOLOGY_INDEX.md) (~250 technologies cataloged)
+| Role | Recommended Sections | Appendices |
+|---|---|---|
+| **CFO / COO** | §9 A2A Cost Tracking & FinOps | Appendix A — Cost Model |
+| **CTO / CIO** | §11 Event-Driven Architecture · §21 Developer Experience | Appendix C — Event Bus Matrix |
+| **CISO** | §15 Security Architecture & Hardening | Appendix D — Security Checklist |
+| **CAIO** | §10 Multi-Model AI Strategy · §14 Regulatory Compliance & AI Governance | Appendix E — Decisions Log |
+| **CRO / CLO** | §14 Regulatory Compliance | Appendix B — Regulatory Checklist |
+| **Operations** | §16 Incident Response · §17 DR/BC · §20 Change Management | — |
+| **Architects** | §2–6 Core Architecture, Identity, Tenancy, APIs, MCP/A2A | — |
 
-## Conformance
+The [Technology Index](./TECHNOLOGY_INDEX.md) catalogs ~250 technologies, frameworks, tools, and standards referenced across the spec.
 
-Any platform claiming EPAS conformance publishes a `conformance.yaml` at the repository root. Tenets are enforced across four layers:
+## Technology Choices (Reference Stack)
 
-| Layer | Mechanism |
-|---|---|
-| Compile-time | Type system, linter, code generation |
-| CI-time | Repository validation, schema checks |
-| Deploy-time | Configuration validation, manifest checks |
-| Runtime | Authorization, audit, ledger |
+The specification is vendor-neutral, but illustrative reference choices are documented:
 
-Partial conformance during migration is permitted and explicitly declared. Drift from declared conformance is a platform incident.
-
-Template: [`2.0/conformance.yaml.template`](./2.0/conformance.yaml.template)
+- **Event Bus:** Kafka / Redpanda (Phase 1), NATS / JetStream (Phase 2, latency optimization)
+- **LLM Primary / Fallback:** Claude Sonnet · OpenAI GPT-4o
+- **Voice:** Deepgram Nova-2 (STT), ElevenLabs Turbo v2.5 (TTS)
+- **Identity:** Zitadel + OpenFGA + SPIRE
+- **Observability:** OpenTelemetry + Grafana LGTM stack
 
 ## What This Is Not
 
-Not a certification. Not legal advice. Not a vendor pitch deck. Reference implementations exist but are explicitly out of scope for normative documents.
+Not a certification. Not legal advice. Not a vendor pitch deck. Reference implementations exist but are explicitly out of scope for the normative document.
 
 ## License
 
