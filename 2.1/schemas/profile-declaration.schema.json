@@ -1,0 +1,487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://epas-platform.github.io/spec/2.1/schemas/profile-declaration.schema.json",
+  "title": "EPAS v2.1 Profile Declaration",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "document",
+    "epas",
+    "profile",
+    "classification",
+    "principles",
+    "controls",
+    "technology",
+    "reference_stack",
+    "conformance"
+  ],
+  "properties": {
+    "schema_version": {
+      "$ref": "#/$defs/schemaVersion"
+    },
+    "document": {
+      "type": "object",
+      "required": ["id", "title", "status", "owner", "updated_at"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/documentStatus"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "epas": {
+      "type": "object",
+      "required": ["base_version", "profile_version"],
+      "properties": {
+        "base_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "profile_version": {
+          "$ref": "#/$defs/semver"
+        }
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": ["profile_id", "description", "composed_from"],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "description": {
+          "type": "string"
+        },
+        "composed_from": {
+          "type": "object",
+          "required": [
+            "lifecycle",
+            "audience",
+            "environment",
+            "governance",
+            "infrastructure",
+            "data_model",
+            "delivery",
+            "architecture"
+          ],
+          "properties": {
+            "lifecycle": {
+              "$ref": "#/$defs/lifecycle"
+            },
+            "audience": {
+              "$ref": "#/$defs/audience"
+            },
+            "environment": {
+              "$ref": "#/$defs/environment"
+            },
+            "governance": {
+              "$ref": "#/$defs/governance"
+            },
+            "infrastructure": {
+              "$ref": "#/$defs/infrastructure"
+            },
+            "data_model": {
+              "$ref": "#/$defs/dataModel"
+            },
+            "delivery": {
+              "$ref": "#/$defs/delivery"
+            },
+            "architecture": {
+              "$ref": "#/$defs/architecture"
+            },
+            "architecture_traits": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/architectureTrait"
+              },
+              "uniqueItems": true
+            },
+            "overlays": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/overlay"
+              },
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": [
+        "primary_use_case",
+        "tenant_mode",
+        "sensitivity",
+        "edge_required",
+        "offline_required"
+      ],
+      "properties": {
+        "primary_use_case": {
+          "type": "string"
+        },
+        "tenant_mode": {
+          "$ref": "#/$defs/tenantMode"
+        },
+        "sensitivity": {
+          "$ref": "#/$defs/sensitivity"
+        },
+        "edge_required": {
+          "type": "boolean"
+        },
+        "offline_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "principles": {
+      "type": "object",
+      "required": ["inherited_from_epas_2_0", "non_waivable"],
+      "properties": {
+        "inherited_from_epas_2_0": {
+          "type": "boolean"
+        },
+        "non_waivable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "controls": {
+      "type": "object",
+      "required": [
+        "authentication",
+        "delegation",
+        "contract_handling",
+        "governance",
+        "events",
+        "documentation"
+      ],
+      "properties": {
+        "authentication": {
+          "$ref": "#/$defs/controlSection"
+        },
+        "delegation": {
+          "$ref": "#/$defs/controlSection"
+        },
+        "contract_handling": {
+          "$ref": "#/$defs/controlSection"
+        },
+        "governance": {
+          "$ref": "#/$defs/controlSection"
+        },
+        "events": {
+          "$ref": "#/$defs/controlSection"
+        },
+        "documentation": {
+          "type": "object",
+          "required": [
+            "llms_txt_required",
+            "agent_context_file_required",
+            "conformance_file_required",
+            "profile_declaration_required"
+          ],
+          "properties": {
+            "llms_txt_required": {
+              "type": "boolean"
+            },
+            "agent_context_file_required": {
+              "type": "boolean"
+            },
+            "conformance_file_required": {
+              "type": "boolean"
+            },
+            "profile_declaration_required": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "technology": {
+      "type": "object",
+      "required": [
+        "ui",
+        "backend",
+        "database",
+        "sdk",
+        "realtime",
+        "queueing",
+        "infrastructure"
+      ],
+      "properties": {
+        "ui": {
+          "$ref": "#/$defs/technologySection"
+        },
+        "backend": {
+          "$ref": "#/$defs/technologySection"
+        },
+        "database": {
+          "$ref": "#/$defs/technologySection"
+        },
+        "sdk": {
+          "type": "object",
+          "required": ["required", "required_languages"],
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "required_languages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "justification": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "realtime": {
+          "$ref": "#/$defs/technologySection"
+        },
+        "queueing": {
+          "$ref": "#/$defs/technologySection"
+        },
+        "infrastructure": {
+          "$ref": "#/$defs/technologySection"
+        }
+      },
+      "additionalProperties": false
+    },
+    "reference_stack": {
+      "type": "object",
+      "required": ["family_id", "name", "components", "selection_status"],
+      "properties": {
+        "family_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "name": {
+          "type": "string"
+        },
+        "selection_status": {
+          "$ref": "#/$defs/referenceStackStatus"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "components": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "conformance": {
+      "type": "object",
+      "required": [
+        "overall_state",
+        "required_declarations",
+        "waivers",
+        "pending_controls"
+      ],
+      "properties": {
+        "overall_state": {
+          "$ref": "#/$defs/conformanceState"
+        },
+        "required_declarations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "waivers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "pending_controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["control", "target_phase"],
+            "properties": {
+              "control": {
+                "type": "string"
+              },
+              "target_phase": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^epas\\.profile/2\\.1(?:-[A-Za-z0-9._-]+)?$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9._-]+)?$"
+    },
+    "documentStatus": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated", "superseded"]
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": ["prototype", "demo", "mvp", "production"]
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["internal_tool", "internal_platform", "customer_facing", "partner_embedded"]
+    },
+    "environment": {
+      "type": "string",
+      "enum": ["local_dev", "preview", "shared_dev", "staging_uat", "production"]
+    },
+    "governance": {
+      "type": "string",
+      "enum": ["g0_exploratory", "g1_guided", "g2_operational", "g3_assured"]
+    },
+    "infrastructure": {
+      "type": "string",
+      "enum": ["i0_local_compose", "i1_simple_runtime", "i2_platform_runtime", "i3_enterprise_multi_env"]
+    },
+    "dataModel": {
+      "type": "string",
+      "enum": ["relational_operational", "entity_relationship_native", "hybrid_multimodal"]
+    },
+    "delivery": {
+      "type": "string",
+      "enum": ["ui_first", "api_first", "sdk_first", "agent_first", "integration_first"]
+    },
+    "architecture": {
+      "type": "string",
+      "enum": ["single_service", "modular_monolith", "service_oriented"]
+    },
+    "architectureTrait": {
+      "type": "string",
+      "enum": ["event_driven", "edge_capable"]
+    },
+    "overlay": {
+      "type": "string",
+      "enum": ["regulated", "edge", "entity_native_agentic", "customer_data_sensitive"]
+    },
+    "tenantMode": {
+      "type": "string",
+      "enum": ["single_tenant", "multi_tenant"]
+    },
+    "sensitivity": {
+      "type": "string",
+      "enum": [
+        "synthetic_only",
+        "internal_non_sensitive",
+        "internal_sensitive",
+        "customer_confidential",
+        "regulated"
+      ]
+    },
+    "realization": {
+      "type": "string",
+      "enum": ["simulated", "lightweight", "partial", "full"]
+    },
+    "controlSection": {
+      "type": "object",
+      "required": ["realization", "mode", "required"],
+      "properties": {
+        "realization": {
+          "$ref": "#/$defs/realization"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "requirements": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "technologySection": {
+      "type": "object",
+      "required": ["default"],
+      "properties": {
+        "default": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": true
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": true
+          }
+        },
+        "justification": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "referenceStackStatus": {
+      "type": "string",
+      "enum": ["default", "permitted_alternative", "requires_justification", "custom"]
+    },
+    "conformanceState": {
+      "type": "string",
+      "enum": ["conformant", "partial", "non_conformant"]
+    }
+  }
+}
